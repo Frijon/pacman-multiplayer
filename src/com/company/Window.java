@@ -10,7 +10,7 @@ public class Window {
         JFrame window = new JFrame();
         window.setSize(1920, 1080);
         //window.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        window.getContentPane().setBackground(Color.cyan);
+        window.getContentPane().setBackground(Color.blue);
         window.setTitle("PacMan");
         window.setVisible(true);
         //window.setContentPane(new JLabel(new ImageIcon("C:\\Users\\barin\\Downloads")));
