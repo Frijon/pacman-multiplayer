@@ -14,5 +14,6 @@ public class Window {
         window.setTitle("PacMan");
         window.setVisible(true);
         //window.setContentPane(new JLabel(new ImageIcon("C:\\Users\\barin\\Downloads")));
+        //test
     }
 }
