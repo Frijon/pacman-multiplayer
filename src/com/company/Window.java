@@ -21,11 +21,4 @@ public class Window extends JPanel {
         g.drawImage(scaledImage, 0, 0, this);
         System.out.println("test");
     }
-
-   /* @Override
-    public void paint(Graphics g) {
-        super.paintComponents(g);
-        g.drawImage(backgroundimg, 0, 0, null);
-    }*/
-
 }
