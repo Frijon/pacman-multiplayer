@@ -8,11 +8,9 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class Main {
-
+public class Main extends Frame {
 
     public static void main(String[] args) {
-        // Erzeugung eines neuen Dialoges
         JFrame Frame = new JFrame();
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Frame.setTitle("JPanel Beispiel");
@@ -48,7 +46,5 @@ public class Main {
 
         Frame.add(panel,BorderLayout.CENTER);
         Frame.setVisible(true);
-
-
     }
 }
