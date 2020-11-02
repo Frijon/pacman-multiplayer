@@ -13,7 +13,7 @@ public class Main extends Frame {
     public static void main(String[] args) {
         JFrame Frame = new JFrame();
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Frame.setTitle("JPanel Beispiel");
+        Frame.setTitle("Pacman");
         Frame.setSize(800,600);
         Image background = Toolkit.getDefaultToolkit().createImage("com/company/index.png");
 

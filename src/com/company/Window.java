@@ -11,7 +11,7 @@ public class Window extends JPanel implements KeyListener {
     static boolean[] Keys = new boolean[4];
 
     Image backgroundimg = Toolkit.getDefaultToolkit().createImage("D://github/Pacman multiplayer/src/com/company/index.png");
-    Image scaledImage = backgroundimg.getScaledInstance(800, 600, 0);
+    Image scaledImage = backgroundimg.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
 
     public Window() {
         this.addKeyListener(this);
@@ -43,30 +43,38 @@ public class Window extends JPanel implements KeyListener {
     public void keyPressed(KeyEvent arg0){
         if (arg0.getKeyCode() == KeyEvent.VK_UP) {
             Keys[0] = true;
+            Player0.dir = "up";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
             Keys[1] = true;
+            Player0.dir = "left";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
             Keys[2] = true;
+            Player0.dir = "right";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
             Keys[3] = true;
+            Player0.dir = "down";
         }
     }
 
     public void keyReleased(KeyEvent arg0){
         if (arg0.getKeyCode() == KeyEvent.VK_UP) {
             Keys[0] = false;
+            Player0.dir = "";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
             Keys[1] = false;
+            Player0.dir = "";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
             Keys[2] = false;
+            Player0.dir = "";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
             Keys[3] = false;
+            Player0.dir = "";
         }
     }
 
