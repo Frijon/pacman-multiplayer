@@ -80,5 +80,6 @@ public class Window extends JPanel implements KeyListener {
 
     public void keyTyped(KeyEvent arg0){
 
+
     }
 }
