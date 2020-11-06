@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.Graphics;
 
 public class Player {
-    int x = 50, y = 50, size = 20;
+    int x = 50, y = 50, size = 50;
     String dir = "";
 
     public Player(){
@@ -18,7 +18,7 @@ public class Player {
         if (Window.Keys[2]) x += 10;
         if (Window.Keys[3]) y += 10;*/
 
-        if ((this.x >= 0 && this.x <= (800 - size)) && (this.y >= 0 && this.y <= (600 - size*3))) {
+        if ((this.x >= 0 && this.x <= (800 - size)) && (this.y >= 0 && this.y <= (600 - size))) {
             switch (this.dir) {
                 case "up" -> y -= 10;
                 case "down" -> y += 10;
@@ -27,13 +27,13 @@ public class Player {
             }
         }
 
-//        System.out.println("this.x = " + this.x);
-//        System.out.println("this.y = " + this.y);
+        //System.out.println("this.x = " + this.x);
+        //System.out.println("this.y = " + this.y);
 
         if (this.x < 0) this.x = 0;
         if (this.x > (800 - size)) this.x = 800 - size;
         if (this.y < 0) this.y = 0;
-        if (this.y > (600 - size)) this.y = 600 - size ;
+        if (this.y > (600 - size)) this.y = 600 - size;
 
     }
 
