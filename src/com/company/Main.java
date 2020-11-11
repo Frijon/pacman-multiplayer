@@ -8,6 +8,7 @@ import java.awt.*;
 import javax.swing.JFrame;
 //import javax.swing.JPanel;
 
+// dies ist ein krasser comment
 public class Main extends Frame {
 
     public static void main(String[] args) {
