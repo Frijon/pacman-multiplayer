@@ -1,16 +1,28 @@
 package com.company;
 
-import javax.media.Player;
-import java.net.URL;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
 
-public class Music extends Thread {
+public class Music{
 
-    @Override
-    public void run(){
+    public void playMusic(String musicLocation){
 
-    }
-
-    public static void Music (){
-
+        try{
+            File musicPath = new File(musicLocation);
+            if(musicPath.exists()){
+                AudioInputStream audioInput = AudioSystem.getAudioInputStream(musicPath);
+                Clip clip = AudioSystem.getClip();
+                clip.open(audioInput);
+                clip.start();
+                clip.loop(Clip.LOOP_CONTINUOUSLY);
+            }
+            else {
+                System.out.println("Cannot find the Audio File");
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
