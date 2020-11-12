@@ -46,5 +46,6 @@ public class Main extends Frame {
 
         Frame.add(panel,BorderLayout.CENTER);
         Frame.setVisible(true);
+
     }
 }
