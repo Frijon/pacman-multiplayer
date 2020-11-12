@@ -48,9 +48,11 @@ public class Main extends Frame {
         Frame.add(panel,BorderLayout.CENTER);
         Frame.setVisible(true);
 
+
         String filepath = "src/com/company/PacMan-ThemeSong.wav";
         Music musicObject = new Music();
         musicObject.playMusic(filepath);
+
     }
 
 

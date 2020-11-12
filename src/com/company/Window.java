@@ -7,7 +7,14 @@ import java.awt.event.KeyListener;
 
 public class Window extends JPanel implements KeyListener {
 
-    Player Player0 = new Player();
+    PacMan Pacman = new PacMan();
+    static int ghostnumber = 1;
+    static Ghost[] Ghosts = new Ghost[4];
+    Ghost Blueghost = new Ghost("blue");
+    Ghost Redghost = new Ghost("red");
+    Ghost Pinkghost = new Ghost("pink");
+    Ghost Yellowghost = new Ghost("yellow");
+
     static boolean[] Keys = new boolean[4];
 
     Image backgroundimg = Toolkit.getDefaultToolkit().createImage("src/com/company/index.png");
@@ -16,69 +23,183 @@ public class Window extends JPanel implements KeyListener {
     public Window() {
         this.addKeyListener(this);
         setFocusable(true);
-        //setBackground(Color.cyan);
-       /* ImageIcon icon = new ImageIcon("com/company/index.png");
-        JLabel thumb = new JLabel();
-        thumb.setIcon(icon);*/
+        Ghosts[0] = Blueghost;
+        Ghosts[1] = Redghost;
+        Ghosts[2] = Pinkghost;
+        Ghosts[3] = Yellowghost;
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(scaledImage, 0, 0, this);
-        Player0.Movement();
+        Blueghost.Movement();
+        Pacman.Movement();
         SleepRefresh();
-        Player0.drawPlayer(g); //commit test
+
+        Pacman.drawPlayer(g);
+
+        for (int i = 0; i < Ghosts.length; i++){
+            Ghosts[i].draw(g, Ghosts[i].color);
+        }
+       
     }
 
-    void SleepRefresh(){
-        try{
-            Thread.sleep(1000/30);
-        }catch (Exception e) {
+    void SleepRefresh() {
+        try {
+            Thread.sleep(1000 / 30);
+        } catch (Exception e) {
 
         }
         repaint();
     }
 
-    public void keyPressed(KeyEvent arg0){
+    public void keyPressed(KeyEvent arg0) {
+
         if (arg0.getKeyCode() == KeyEvent.VK_UP) {
             Keys[0] = true;
-            Player0.dir = "up";
+            Pacman.dir = "up";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
             Keys[1] = true;
-            Player0.dir = "left";
+            Pacman.dir = "left";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
             Keys[2] = true;
-            Player0.dir = "right";
+            Pacman.dir = "right";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
             Keys[3] = true;
-            Player0.dir = "down";
+            Pacman.dir = "down";
         }
+
+        if (arg0.getKeyCode() == KeyEvent.VK_1) ghostnumber = 1;
+        if (arg0.getKeyCode() == KeyEvent.VK_2) ghostnumber = 2;
+        if (arg0.getKeyCode() == KeyEvent.VK_3) ghostnumber = 3;
+        if (arg0.getKeyCode() == KeyEvent.VK_4) ghostnumber = 4;
+
+        //blue ghost
+        if (arg0.getKeyCode() == KeyEvent.VK_W) {
+            Keys[0] = true;
+            Ghosts[ghostnumber - 1].dir = "up";
+            System.out.println("ghost 0 posx = " + Ghosts[0].posx);
+            System.out.println("ghost 0 posy = " + Ghosts[0].posy);
+
+            System.out.println("ghost 1 posx = " + Ghosts[1].posx);
+            System.out.println("ghost 1 posy = " + Ghosts[1].posy);
+        }
+        if (arg0.getKeyCode() == KeyEvent.VK_A) {
+            Keys[1] = true;
+            Ghosts[ghostnumber - 1].dir = "left";
+        }
+        if (arg0.getKeyCode() == KeyEvent.VK_D) {
+            Keys[2] = true;
+            Ghosts[ghostnumber - 1].dir = "right";
+        }
+        if (arg0.getKeyCode() == KeyEvent.VK_S) {
+            Keys[3] = true;
+            Ghosts[ghostnumber - 1].dir = "down";
+        }
+        //break;
+
+        //red ghost
+            /*case 2:
+                if (arg0.getKeyCode() == KeyEvent.VK_W) {
+                    Keys[0] = true;
+                    Ghosts[1].dir = "up";
+                }
+                if (arg0.getKeyCode() == KeyEvent.VK_A) {
+                    Keys[1] = true;
+                    Ghosts[1].dir = "left";
+                }
+                if (arg0.getKeyCode() == KeyEvent.VK_D) {
+                    Keys[2] = true;
+                    Ghosts[1].dir = "right";
+                }
+                if (arg0.getKeyCode() == KeyEvent.VK_S) {
+                    Keys[3] = true;
+                    Ghosts[1].dir = "down";
+                }
+                break;
+
+            //pink ghost
+            case 3:
+                if (arg0.getKeyCode() == KeyEvent.VK_W) {
+                    Keys[0] = true;
+                    Ghosts[2].dir = "up";
+                }
+                if (arg0.getKeyCode() == KeyEvent.VK_A) {
+                    Keys[1] = true;
+                    Ghosts[2].dir = "left";
+                }
+                if (arg0.getKeyCode() == KeyEvent.VK_D) {
+                    Keys[2] = true;
+                    Ghosts[2].dir = "right";
+                }
+                if (arg0.getKeyCode() == KeyEvent.VK_S) {
+                    Keys[3] = true;
+                    Ghosts[2].dir = "down";
+                }
+                break;
+
+            //yellow ghost
+            case 4:
+                if (arg0.getKeyCode() == KeyEvent.VK_W) {
+                    Keys[0] = true;
+                    Ghosts[3].dir = "up";
+                }
+                if (arg0.getKeyCode() == KeyEvent.VK_A) {
+                    Keys[1] = true;
+                    Ghosts[3].dir = "left";
+                }
+                if (arg0.getKeyCode() == KeyEvent.VK_D) {
+                    Keys[2] = true;
+                    Ghosts[3].dir = "right";
+                }
+                if (arg0.getKeyCode() == KeyEvent.VK_S) {
+                    Keys[3] = true;
+                    Ghosts[3].dir = "down";
+                }
+                break;*/
     }
 
-    public void keyReleased(KeyEvent arg0){
+    public void keyReleased(KeyEvent arg0) {
         if (arg0.getKeyCode() == KeyEvent.VK_UP) {
             Keys[0] = false;
-            Player0.dir = "";
+            Pacman.dir = "";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
             Keys[1] = false;
-            Player0.dir = "";
+            Pacman.dir = "";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
             Keys[2] = false;
-            Player0.dir = "";
+            Pacman.dir = "";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
             Keys[3] = false;
-            Player0.dir = "";
+            Pacman.dir = "";
+        }
+
+        if (arg0.getKeyCode() == KeyEvent.VK_W) {
+            Keys[0] = false;
+            Ghosts[ghostnumber - 1].dir = "";
+        }
+        if (arg0.getKeyCode() == KeyEvent.VK_A) {
+            Keys[1] = false;
+            Ghosts[ghostnumber - 1].dir = "";
+        }
+        if (arg0.getKeyCode() == KeyEvent.VK_D) {
+            Keys[2] = false;
+            Ghosts[ghostnumber - 1].dir = "";
+        }
+        if (arg0.getKeyCode() == KeyEvent.VK_S) {
+            Keys[3] = false;
+            Ghosts[ghostnumber - 1].dir = "";
         }
     }
 
-    public void keyTyped(KeyEvent arg0){
+    public void keyTyped(KeyEvent arg0) {
 
 
     }
