@@ -1,12 +1,12 @@
 package com.company;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-import javax.swing.JDialog;
+//import javax.swing.JButton;
+//import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
+//import javax.swing.JPanel;
 
 public class Main extends Frame {
 
@@ -14,8 +14,8 @@ public class Main extends Frame {
         JFrame Frame = new JFrame();
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Frame.setTitle("Pacman");
-        Frame.setSize(800,600);
-        Image background = Toolkit.getDefaultToolkit().createImage("com/company/index.png");
+        //the JFrame size also counts the top bezel, which seems to be 37 pixels wide
+        Frame.setSize(800,600 + 37);
 
         Window panel = new Window();
 

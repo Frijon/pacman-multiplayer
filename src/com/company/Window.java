@@ -10,8 +10,8 @@ public class Window extends JPanel implements KeyListener {
     Player Player0 = new Player();
     static boolean[] Keys = new boolean[4];
 
-    Image backgroundimg = Toolkit.getDefaultToolkit().createImage("D://github/Pacman multiplayer/src/com/company/index.png");
-    Image scaledImage = backgroundimg.getScaledInstance(800, 600, Image.SCALE_SMOOTH);
+    Image backgroundimg = Toolkit.getDefaultToolkit().createImage("src/com/company/index.png");
+    Image scaledImage = backgroundimg.getScaledInstance(800, 600, 0);
 
     public Window() {
         this.addKeyListener(this);
