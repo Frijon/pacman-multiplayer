@@ -1,11 +1,12 @@
 package com.company;
+
+import javax.swing.*;
 import java.awt.*;
+
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
-
 //import javax.swing.JButton;
 //import javax.swing.JDialog;
-import javax.swing.JFrame;
 //import javax.swing.JPanel;
 
 public class Main extends Frame {
@@ -47,5 +48,12 @@ public class Main extends Frame {
         Frame.add(panel,BorderLayout.CENTER);
         Frame.setVisible(true);
 
+
+        String filepath = "src/com/company/PacMan-ThemeSong.wav";
+        Music musicObject = new Music();
+        musicObject.playMusic(filepath);
+
     }
+
+
 }

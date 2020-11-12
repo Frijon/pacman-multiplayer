@@ -1,7 +1,7 @@
 package com.company;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -36,11 +36,13 @@ public class Window extends JPanel implements KeyListener {
         Blueghost.Movement();
         Pacman.Movement();
         SleepRefresh();
+
         Pacman.drawPlayer(g);
 
         for (int i = 0; i < Ghosts.length; i++){
             Ghosts[i].draw(g, Ghosts[i].color);
         }
+       
     }
 
     void SleepRefresh() {
@@ -201,4 +203,6 @@ public class Window extends JPanel implements KeyListener {
 
 
     }
+
+
 }
