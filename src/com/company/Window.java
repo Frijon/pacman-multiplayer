@@ -1,7 +1,7 @@
 package com.company;
 
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -28,7 +28,7 @@ public class Window extends JPanel implements KeyListener {
         g.drawImage(scaledImage, 0, 0, this);
         Player0.Movement();
         SleepRefresh();
-        Player0.drawPlayer(g);
+        Player0.drawPlayer(g); //commit test
     }
 
     void SleepRefresh(){
