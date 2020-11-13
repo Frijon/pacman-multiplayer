@@ -33,7 +33,10 @@ public class Window extends JPanel implements KeyListener {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.drawImage(scaledImage, 0, 0, this);
-        Blueghost.Movement();
+
+        for (int i = 0; i < Ghosts.length; i++){
+            Ghosts[i].Movement();
+        }
         Pacman.Movement();
         SleepRefresh();
 
@@ -78,15 +81,17 @@ public class Window extends JPanel implements KeyListener {
         if (arg0.getKeyCode() == KeyEvent.VK_3) ghostnumber = 3;
         if (arg0.getKeyCode() == KeyEvent.VK_4) ghostnumber = 4;
 
+        System.out.println("ghostnumber = " + ghostnumber);
+
         //blue ghost
         if (arg0.getKeyCode() == KeyEvent.VK_W) {
             Keys[0] = true;
             Ghosts[ghostnumber - 1].dir = "up";
-            System.out.println("ghost 0 posx = " + Ghosts[0].posx);
-            System.out.println("ghost 0 posy = " + Ghosts[0].posy);
+            System.out.println("ghost[2].dir = " + Ghosts[2].dir);
+            System.out.println("ghost[1].dir = " + Ghosts[1].dir);
 
-            System.out.println("ghost 1 posx = " + Ghosts[1].posx);
-            System.out.println("ghost 1 posy = " + Ghosts[1].posy);
+            //System.out.println("ghost 1 posx = " + Ghosts[1].posx);
+            //System.out.println("ghost 1 posy = " + Ghosts[1].posy);
         }
         if (arg0.getKeyCode() == KeyEvent.VK_A) {
             Keys[1] = true;
