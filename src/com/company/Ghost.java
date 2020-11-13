@@ -20,8 +20,8 @@ public class Ghost {
             case "pink":
                 this.color = "pink";
                 break;
-            case "yellow":
-                this.color = "yellow";
+            case "green":
+                this.color = "green";
                 break;
         }
     }
@@ -63,8 +63,8 @@ public class Ghost {
             case "pink":
                 g.setColor(Color.pink);
                 break;
-            case "yellow":
-                g.setColor(Color.yellow);
+            case "green":
+                g.setColor(Color.green);
                 break;
         }
 

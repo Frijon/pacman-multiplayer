@@ -1,5 +1,7 @@
 package com.company;
 
+import sun.awt.WindowIDProvider;
+
 import java.awt.*;
 import java.awt.Graphics;
 
@@ -42,6 +44,12 @@ public class PacMan {
         if (this.x > Main.GAME_WIDTH) this.x = 0 - size;
         if (this.y < 0 - size) this.y = Main.GAME_HEIGHT;
         if (this.y > Main.GAME_HEIGHT) this.y = 0 - size;
+
+        for (int i = 0; i < Window.Ghosts.length; i++){
+            if ((((this.x + size) > Window.Ghosts[i].posx) && (this.x < (Window.Ghosts[i].posx + Window.Ghosts[i].size))) && ((this.y < (Window.Ghosts[i].posy + Window.Ghosts[i].posy)) && ((this.y + this.size) > Window.Ghosts[i].posy))){
+                System.out.println("Game lost!");
+            }
+        }
 
     }
 

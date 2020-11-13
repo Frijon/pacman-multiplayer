@@ -13,7 +13,7 @@ public class Window extends JPanel implements KeyListener {
     Ghost Blueghost = new Ghost("blue");
     Ghost Redghost = new Ghost("red");
     Ghost Pinkghost = new Ghost("pink");
-    Ghost Yellowghost = new Ghost("yellow");
+    Ghost Greenghost = new Ghost("green");
 
     static boolean[] Keys = new boolean[4];
 
@@ -26,7 +26,7 @@ public class Window extends JPanel implements KeyListener {
         Ghosts[0] = Blueghost;
         Ghosts[1] = Redghost;
         Ghosts[2] = Pinkghost;
-        Ghosts[3] = Yellowghost;
+        Ghosts[3] = Greenghost;
     }
 
     @Override
