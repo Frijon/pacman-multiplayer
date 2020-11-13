@@ -11,12 +11,15 @@ import java.awt.*;
 
 public class Main extends Frame {
 
+    static int GAME_WIDTH = 800;
+    static int GAME_HEIGHT = 600;
+
     public static void main(String[] args) {
         JFrame Frame = new JFrame();
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Frame.setTitle("Pacman");
         //the JFrame size also counts the top bezel, which seems to be 37 pixels wide
-        Frame.setSize(800,600 + 37);
+        Frame.setSize(GAME_WIDTH,GAME_HEIGHT + 37);
 
         Window panel = new Window();
 
