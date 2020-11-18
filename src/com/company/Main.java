@@ -26,7 +26,7 @@ public class Main extends Frame {
 
         String filepath = "src/com/company/PacMan-ThemeSong.wav";
         Music musicObject = new Music();
-        musicObject.playMusic(filepath);
+        //musicObject.playMusic(filepath);
 
     }
 

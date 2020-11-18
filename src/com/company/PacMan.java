@@ -1,7 +1,5 @@
 package com.company;
 
-import sun.awt.WindowIDProvider;
-
 import java.awt.*;
 import java.awt.Graphics;
 
@@ -14,11 +12,6 @@ public class PacMan {
     }
 
     void Movement (){
-
-       /* if (Window.Keys[0]) y -= 10;
-        if (Window.Keys[1]) x -= 10;
-        if (Window.Keys[2]) x += 10;
-        if (Window.Keys[3]) y += 10;*/
 
         if ((this.x >= (0 - size) && this.x <= Main.GAME_WIDTH) && (this.y >= (0 - size) && this.y <= Main.GAME_HEIGHT)) {
             switch (this.dir) {
@@ -46,8 +39,9 @@ public class PacMan {
         if (this.y > Main.GAME_HEIGHT) this.y = 0 - size;
 
         for (int i = 0; i < Window.Ghosts.length; i++){
-            if ((((this.x + size) > Window.Ghosts[i].posx) && (this.x < (Window.Ghosts[i].posx + Window.Ghosts[i].size))) && ((this.y < (Window.Ghosts[i].posy + Window.Ghosts[i].posy)) && ((this.y + this.size) > Window.Ghosts[i].posy))){
+            if ((((this.x + size) > Window.Ghosts[i].posx) && (this.x < (Window.Ghosts[i].posx + Window.Ghosts[i].size))) && ((this.y < (Window.Ghosts[i].posy + Window.Ghosts[i].size)) && ((this.y + this.size) > Window.Ghosts[i].posy))){
                 System.out.println("Game lost!");
+                Main.run = false;
             }
         }
 
