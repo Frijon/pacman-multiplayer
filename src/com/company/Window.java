@@ -17,8 +17,11 @@ public class Window extends JPanel implements KeyListener {
 
     static boolean[] Keys = new boolean[4];
 
-    Image backgroundimg = Toolkit.getDefaultToolkit().createImage("src/com/company/index.png");
-    Image scaledImage = backgroundimg.getScaledInstance(800, 600, 0);
+    static Image backgroundimg = Toolkit.getDefaultToolkit().createImage("src/com/company/PacManWorld.png");
+    static Image scaledImage = backgroundimg.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
+
+    static Image gameOverImg = Toolkit.getDefaultToolkit().createImage("src/com/company/GameOver.png");
+    static Image scaledGameOverImg = gameOverImg.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
 
     public Window() {
         this.addKeyListener(this);
@@ -32,18 +35,24 @@ public class Window extends JPanel implements KeyListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(scaledImage, 0, 0, this);
 
-        for (int i = 0; i < Ghosts.length; i++){
-            Ghosts[i].Movement();
-        }
-        Pacman.Movement();
-        SleepRefresh();
+        if (Main.run) {
+            g.drawImage(scaledImage, 0, 0, this);
 
-        Pacman.drawPlayer(g);
+            for (int i = 0; i < Ghosts.length; i++) {
+                Ghosts[i].Movement();
+            }
 
-        for (int i = 0; i < Ghosts.length; i++){
-            Ghosts[i].draw(g, Ghosts[i].color);
+            Pacman.Movement();
+            SleepRefresh();
+
+            Pacman.drawPlayer(g);
+
+            for (int i = 0; i < Ghosts.length; i++) {
+                Ghosts[i].draw(g, Ghosts[i].color);
+            }
+        } else {
+            g.drawImage(scaledGameOverImg, 0, 0, this);
         }
        
     }
@@ -81,14 +90,11 @@ public class Window extends JPanel implements KeyListener {
         if (arg0.getKeyCode() == KeyEvent.VK_3) ghostnumber = 3;
         if (arg0.getKeyCode() == KeyEvent.VK_4) ghostnumber = 4;
 
-        System.out.println("ghostnumber = " + ghostnumber);
 
         //blue ghost
         if (arg0.getKeyCode() == KeyEvent.VK_W) {
             Keys[0] = true;
             Ghosts[ghostnumber - 1].dir = "up";
-            System.out.println("ghost[2].dir = " + Ghosts[2].dir);
-            System.out.println("ghost[1].dir = " + Ghosts[1].dir);
 
             //System.out.println("ghost 1 posx = " + Ghosts[1].posx);
             //System.out.println("ghost 1 posy = " + Ghosts[1].posy);
