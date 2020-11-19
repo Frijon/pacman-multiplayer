@@ -23,11 +23,9 @@ public class Main extends Frame {
         Frame.setUndecorated(true);
         Frame.setVisible(true);
 
-
         String filepath = "src/com/company/PacMan-ThemeSong.wav";
         Music musicObject = new Music();
         //musicObject.playMusic(filepath);
-
     }
 
 
