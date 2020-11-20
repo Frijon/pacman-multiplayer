@@ -7,18 +7,24 @@ import java.awt.event.KeyListener;
 
 public class Window extends JPanel implements KeyListener {
 
-    PacMan Pacman = new PacMan();
+    static PacMan Pacman = new PacMan();
     static int ghostnumber = 1;
     static Ghost[] Ghosts = new Ghost[4];
-    Ghost Blueghost = new Ghost("blue");
-    Ghost Redghost = new Ghost("red");
-    Ghost Pinkghost = new Ghost("pink");
-    Ghost Yellowghost = new Ghost("yellow");
+    static Ghost Blueghost = new Ghost("blue");
+    static Ghost Redghost = new Ghost("red");
+    static Ghost Pinkghost = new Ghost("pink");
+    static Ghost Greenghost = new Ghost("green");
 
     static boolean[] Keys = new boolean[4];
 
-    Image backgroundimg = Toolkit.getDefaultToolkit().createImage("src/com/company/index.png");
-    Image scaledImage = backgroundimg.getScaledInstance(800, 600, 0);
+    static Image backgroundimg = Toolkit.getDefaultToolkit().createImage("src/com/company/index.png");
+    static Image scaledImage = backgroundimg.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
+
+    static Image gameOverImg = Toolkit.getDefaultToolkit().createImage("src/com/company/GameOver.png");
+    static Image scaledGameOverImg = gameOverImg.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
+
+    static Obstacle[] obstacles = new Obstacle[10];
+
 
     public Window() {
         this.addKeyListener(this);
@@ -26,24 +32,72 @@ public class Window extends JPanel implements KeyListener {
         Ghosts[0] = Blueghost;
         Ghosts[1] = Redghost;
         Ghosts[2] = Pinkghost;
-        Ghosts[3] = Yellowghost;
+        Ghosts[3] = Greenghost;
+
+        for (int i = 0; i < obstacles.length; i++){
+            Obstacle obstacle = new Obstacle(0, 0, 0, 0);
+            obstacles[i] = obstacle;
+        }
+
+        obstacles[0].posx = 0;
+        obstacles[0].posy = 0;
+        obstacles[0].width = 50;
+        obstacles[0].height = 150;
+
+        obstacles[1].posx = 50;
+        obstacles[1].posy = 100;
+        obstacles[1].width = 100;
+        obstacles[1].height = 50;
+
+        obstacles[2].posx = 0;
+        obstacles[2].posy = 200;
+        obstacles[2].width = 150;
+        obstacles[2].height = 50;
+
+        obstacles[3].posx = 150;
+        obstacles[3].posy = 100;
+        obstacles[3].width = 50;
+        obstacles[3].height = 150;
+
+        obstacles[4].posx = 100;
+        obstacles[4].posy = 0;
+        obstacles[4].width = 100;
+        obstacles[4].height = 50;
     }
+
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(scaledImage, 0, 0, this);
 
-        for (int i = 0; i < Ghosts.length; i++){
-            Ghosts[i].Movement();
-        }
-        Pacman.Movement();
-        SleepRefresh();
+        if (Main.run) {
+            //g.drawImage(scaledImage, 0, 0, this);
 
-        Pacman.drawPlayer(g);
+            g.setColor(Color.black);
+            g.fillRect(0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT);
 
-        for (int i = 0; i < Ghosts.length; i++){
-            Ghosts[i].draw(g, Ghosts[i].color);
+            //drawing the map
+            /*g.setColor(Color.blue);
+            g.fillRect(0, 0, 100, 200);
+            g.fillRect(100, 100, 200, 100);
+            g.fillRect(400, 0, 100, 200);*/
+
+            for (int i = 0; i < obstacles.length; i++) obstacles[i].draw(g);
+
+            for (int i = 0; i < Ghosts.length; i++) {
+                Ghosts[i].Movement();
+            }
+
+            Pacman.Movement();
+            SleepRefresh();
+
+            Pacman.drawPlayer(g);
+
+            for (int i = 0; i < Ghosts.length; i++) {
+                Ghosts[i].draw(g, Ghosts[i].color);
+            }
+        } else {
+            g.drawImage(scaledGameOverImg, 0, 0, this);
         }
        
     }
@@ -61,19 +115,19 @@ public class Window extends JPanel implements KeyListener {
 
         if (arg0.getKeyCode() == KeyEvent.VK_UP) {
             Keys[0] = true;
-            Pacman.dir = "up";
+            Pacman.nextdir = "up";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
             Keys[1] = true;
-            Pacman.dir = "left";
+            Pacman.nextdir = "left";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
             Keys[2] = true;
-            Pacman.dir = "right";
+            Pacman.nextdir = "right";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
             Keys[3] = true;
-            Pacman.dir = "down";
+            Pacman.nextdir = "down";
         }
 
         if (arg0.getKeyCode() == KeyEvent.VK_1) ghostnumber = 1;
@@ -81,95 +135,27 @@ public class Window extends JPanel implements KeyListener {
         if (arg0.getKeyCode() == KeyEvent.VK_3) ghostnumber = 3;
         if (arg0.getKeyCode() == KeyEvent.VK_4) ghostnumber = 4;
 
-        System.out.println("ghostnumber = " + ghostnumber);
 
-        //blue ghost
         if (arg0.getKeyCode() == KeyEvent.VK_W) {
             Keys[0] = true;
-            Ghosts[ghostnumber - 1].dir = "up";
-            System.out.println("ghost[2].dir = " + Ghosts[2].dir);
-            System.out.println("ghost[1].dir = " + Ghosts[1].dir);
-
-            //System.out.println("ghost 1 posx = " + Ghosts[1].posx);
-            //System.out.println("ghost 1 posy = " + Ghosts[1].posy);
+            Ghosts[ghostnumber - 1].nextdir = "up";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_A) {
             Keys[1] = true;
-            Ghosts[ghostnumber - 1].dir = "left";
+            Ghosts[ghostnumber - 1].nextdir = "left";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_D) {
             Keys[2] = true;
-            Ghosts[ghostnumber - 1].dir = "right";
+            Ghosts[ghostnumber - 1].nextdir = "right";
         }
         if (arg0.getKeyCode() == KeyEvent.VK_S) {
             Keys[3] = true;
-            Ghosts[ghostnumber - 1].dir = "down";
+            Ghosts[ghostnumber - 1].nextdir = "down";
         }
-        //break;
-
-        //red ghost
-            /*case 2:
-                if (arg0.getKeyCode() == KeyEvent.VK_W) {
-                    Keys[0] = true;
-                    Ghosts[1].dir = "up";
-                }
-                if (arg0.getKeyCode() == KeyEvent.VK_A) {
-                    Keys[1] = true;
-                    Ghosts[1].dir = "left";
-                }
-                if (arg0.getKeyCode() == KeyEvent.VK_D) {
-                    Keys[2] = true;
-                    Ghosts[1].dir = "right";
-                }
-                if (arg0.getKeyCode() == KeyEvent.VK_S) {
-                    Keys[3] = true;
-                    Ghosts[1].dir = "down";
-                }
-                break;
-
-            //pink ghost
-            case 3:
-                if (arg0.getKeyCode() == KeyEvent.VK_W) {
-                    Keys[0] = true;
-                    Ghosts[2].dir = "up";
-                }
-                if (arg0.getKeyCode() == KeyEvent.VK_A) {
-                    Keys[1] = true;
-                    Ghosts[2].dir = "left";
-                }
-                if (arg0.getKeyCode() == KeyEvent.VK_D) {
-                    Keys[2] = true;
-                    Ghosts[2].dir = "right";
-                }
-                if (arg0.getKeyCode() == KeyEvent.VK_S) {
-                    Keys[3] = true;
-                    Ghosts[2].dir = "down";
-                }
-                break;
-
-            //yellow ghost
-            case 4:
-                if (arg0.getKeyCode() == KeyEvent.VK_W) {
-                    Keys[0] = true;
-                    Ghosts[3].dir = "up";
-                }
-                if (arg0.getKeyCode() == KeyEvent.VK_A) {
-                    Keys[1] = true;
-                    Ghosts[3].dir = "left";
-                }
-                if (arg0.getKeyCode() == KeyEvent.VK_D) {
-                    Keys[2] = true;
-                    Ghosts[3].dir = "right";
-                }
-                if (arg0.getKeyCode() == KeyEvent.VK_S) {
-                    Keys[3] = true;
-                    Ghosts[3].dir = "down";
-                }
-                break;*/
     }
 
     public void keyReleased(KeyEvent arg0) {
-        if (arg0.getKeyCode() == KeyEvent.VK_UP) {
+        /*if (arg0.getKeyCode() == KeyEvent.VK_UP) {
             Keys[0] = false;
             Pacman.dir = "";
         }
@@ -201,7 +187,7 @@ public class Window extends JPanel implements KeyListener {
         if (arg0.getKeyCode() == KeyEvent.VK_S) {
             Keys[3] = false;
             Ghosts[ghostnumber - 1].dir = "";
-        }
+        }*/
     }
 
     public void keyTyped(KeyEvent arg0) {
