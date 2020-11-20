@@ -46,7 +46,7 @@ public class PacMan {
         for (int i = 0; i < Window.Ghosts.length; i++) {
             if ((((this.x + size) > Window.Ghosts[i].posx) && (this.x < (Window.Ghosts[i].posx + Window.Ghosts[i].size))) && ((this.y < (Window.Ghosts[i].posy + Window.Ghosts[i].size)) && ((this.y + this.size) > Window.Ghosts[i].posy))) {
                 System.out.println("Game lost!");
-                Main.run = false;
+                Main.gamestatus = 0;
             }
         }
 

@@ -8,7 +8,10 @@ public class Main extends Frame {
     static int GAME_WIDTH = 1920;
     static int GAME_HEIGHT = 1080;
 
-    static boolean run = true;
+    /*
+    gamestatus
+     */
+    static int gamestatus = 2;
 
     public static void main(String[] args) {
         JFrame Frame = new JFrame();

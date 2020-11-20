@@ -23,8 +23,16 @@ public class Window extends JPanel implements KeyListener {
     static Image gameOverImg = Toolkit.getDefaultToolkit().createImage("src/com/company/GameOver.png");
     static Image scaledGameOverImg = gameOverImg.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
 
+    static Image startscreen = Toolkit.getDefaultToolkit().createImage("src/com/company/PacMan-Start _Screen.png");
+    static Image scaledStartscreen = startscreen.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
+
+    static Image startscreenSpace = Toolkit.getDefaultToolkit().createImage("src/com/company/PacMan-Start _Screen-Space.png");
+    static Image scaledStartscreenSpace = startscreenSpace.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
+
+
     static Obstacle[] obstacles = new Obstacle[10];
 
+    static int frame = 0;
 
     public Window() {
         this.addKeyListener(this);
@@ -69,10 +77,12 @@ public class Window extends JPanel implements KeyListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        SleepRefresh();
 
-        if (Main.run) {
+        if (Main.gamestatus == 1) {
             //g.drawImage(scaledImage, 0, 0, this);
 
+            //background
             g.setColor(Color.black);
             g.fillRect(0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT);
 
@@ -83,23 +93,28 @@ public class Window extends JPanel implements KeyListener {
             g.fillRect(400, 0, 100, 200);*/
 
             for (int i = 0; i < obstacles.length; i++) obstacles[i].draw(g);
-
             for (int i = 0; i < Ghosts.length; i++) {
                 Ghosts[i].Movement();
             }
 
             Pacman.Movement();
-            SleepRefresh();
-
             Pacman.drawPlayer(g);
 
             for (int i = 0; i < Ghosts.length; i++) {
                 Ghosts[i].draw(g, Ghosts[i].color);
             }
-        } else {
+
+        } else if (Main.gamestatus == 0){
             g.drawImage(scaledGameOverImg, 0, 0, this);
+        } else if (Main.gamestatus == 2){
+            if (frame <= 5) g.drawImage(scaledStartscreen, 0,0, this);
+            else if (frame > 5) g.drawImage(scaledStartscreenSpace, 0,0, this);
+        } else {
+            System.out.println("Something is very wrong!!");
         }
-       
+
+        frame %= 10;
+        frame++;
     }
 
     void SleepRefresh() {
@@ -152,42 +167,24 @@ public class Window extends JPanel implements KeyListener {
             Keys[3] = true;
             Ghosts[ghostnumber - 1].nextdir = "down";
         }
+
+        if (arg0.getKeyCode() == KeyEvent.VK_SPACE) {
+            Main.gamestatus = 1;
+            System.out.println("Restart");
+            Pacman.x = 100;
+            Pacman.y = 50;
+            Pacman.dir = "";
+            Pacman.nextdir = "";
+            for (int i = 0; i < Ghosts.length; i++){
+                Ghosts[i].posx = 500;
+                Ghosts[i].posy = 100;
+            }
+
+        }
     }
 
     public void keyReleased(KeyEvent arg0) {
-        /*if (arg0.getKeyCode() == KeyEvent.VK_UP) {
-            Keys[0] = false;
-            Pacman.dir = "";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
-            Keys[1] = false;
-            Pacman.dir = "";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
-            Keys[2] = false;
-            Pacman.dir = "";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
-            Keys[3] = false;
-            Pacman.dir = "";
-        }
 
-        if (arg0.getKeyCode() == KeyEvent.VK_W) {
-            Keys[0] = false;
-            Ghosts[ghostnumber - 1].dir = "";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_A) {
-            Keys[1] = false;
-            Ghosts[ghostnumber - 1].dir = "";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_D) {
-            Keys[2] = false;
-            Ghosts[ghostnumber - 1].dir = "";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_S) {
-            Keys[3] = false;
-            Ghosts[ghostnumber - 1].dir = "";
-        }*/
     }
 
     public void keyTyped(KeyEvent arg0) {
