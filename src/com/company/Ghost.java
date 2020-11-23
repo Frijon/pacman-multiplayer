@@ -3,8 +3,8 @@ package com.company;
 import java.awt.*;
 
 public class Ghost {
-    int size = 50;
-    int startposx = 500, startposy = 500;
+    int size = 50, vel = 10;
+    int startposx = 250, startposy = 50;
     int posx = startposx, posy = startposy;
     String dir = "";
     String nextdir = "";
@@ -37,16 +37,16 @@ public class Ghost {
                 if (this.posx % 50 == 0 && this.posy % 50 == 0) this.dir = this.nextdir;
                 switch (this.dir) {
                     case "up":
-                        this.posy -= 10;
+                        this.posy -= vel;
                         break;
                     case "down":
-                        this.posy += 10;
+                        this.posy += vel;
                         break;
                     case "left":
-                        this.posx -= 10;
+                        this.posx -= vel;
                         break;
                     case "right":
-                        this.posx += 10;
+                        this.posx += vel;
                         break;
                 }
             }

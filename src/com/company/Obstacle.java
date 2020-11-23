@@ -15,7 +15,6 @@ public class Obstacle {
 
     void draw(Graphics g){
         g.setColor(Color.blue);
-        Graphics2D g2d = (Graphics2D) g;
-        g2d.fillRoundRect(this.posx, this.posy, this.width, this.height, 30, 30);
+        g.fillRoundRect(this.posx, this.posy, this.width, this.height, 30, 30);
     }
 }

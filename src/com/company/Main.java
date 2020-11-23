@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class Main extends Frame {
 
-    static int GAME_WIDTH = 1400;
+    static int GAME_WIDTH = 1350;
     static int GAME_HEIGHT = 800;
 
     static int WINDOW_WIDTH = 1920;

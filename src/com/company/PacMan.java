@@ -4,7 +4,7 @@ import java.awt.*;
 import java.awt.Graphics;
 
 public class PacMan {
-    int startx = 50, starty = 50;
+    int startx = 50, starty = 50, vel = 10;
     int x = startx, y = starty, size = 50;
     String dir = "";
     String nextdir = "";
@@ -22,16 +22,16 @@ public class PacMan {
                 if (this.x % 50 == 0 && this.y % 50 == 0) this.dir = this.nextdir;
                 switch (this.dir) {
                     case "up":
-                        y -= 10;
+                        y -= vel;
                         break;
                     case "down":
-                        y += 10;
+                        y += vel;
                         break;
                     case "left":
-                        x -= 10;
+                        x -= vel;
                         break;
                     case "right":
-                        x += 10;
+                        x += vel;
                         break;
                 }
             }
