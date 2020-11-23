@@ -3,8 +3,9 @@ package com.company;
 import java.awt.*;
 
 public class Ghost {
-    int size = 20;
-    int posx = 500, posy = 100;
+    int size = 100;
+    int startposx = 500, startposy = 500;
+    int posx = startposx, posy = startposy;
     String dir = "";
     String nextdir = "";
     String color;
@@ -30,7 +31,7 @@ public class Ghost {
 
     void Movement(){
 
-        if ((this.posx >= 0 && this.posx <= (Main.GAME_WIDTH - size)) && (this.posy >= 0 && this.posy <= (Main.GAME_HEIGHT - size))) {
+        if ((this.posx >= 0 && this.posx <= (Main.WINDOW_WIDTH - size)) && (this.posy >= 0 && this.posy <= (Main.WINODW_HEIGHT - size))) {
             if (this.posx % 100 == 0 && this.posy % 100 == 0) this.dir = this.nextdir;
             switch (this.dir) {
                 case "up": this.posy -= 10;
@@ -45,9 +46,9 @@ public class Ghost {
         }
 
         if (this.posx < 0) this.posx = 0;
-        if (this.posx > (Main.GAME_WIDTH - size)) this.posx = Main.GAME_WIDTH - size;
+        if (this.posx > (Main.WINDOW_WIDTH - size)) this.posx = Main.WINDOW_WIDTH - size;
         if (this.posy < 0) this.posy = 0;
-        if (this.posy > (Main.GAME_HEIGHT - size)) this.posy = Main.GAME_HEIGHT - size ;
+        if (this.posy > (Main.WINODW_HEIGHT - size)) this.posy = Main.WINODW_HEIGHT - size ;
 
     }
 
@@ -67,7 +68,7 @@ public class Ghost {
                 break;
         }
 
-        g.fillOval(posx, posy, size, size);
+        g.fillRect(posx, posy, size, size);
     }
 
 }
