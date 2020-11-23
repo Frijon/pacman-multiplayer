@@ -18,19 +18,19 @@ public class Window extends JPanel implements KeyListener {
     static boolean[] Keys = new boolean[4];
 
     static Image backgroundimg = Toolkit.getDefaultToolkit().createImage("src/com/company/index.png");
-    static Image scaledImage = backgroundimg.getScaledInstance(Main.WINDOW_WIDTH, Main.WINODW_HEIGHT, 0);
+    static Image scaledImage = backgroundimg.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
 
     static Image gameOverImg = Toolkit.getDefaultToolkit().createImage("src/com/company/GameOver.png");
-    static Image scaledGameOverImg = gameOverImg.getScaledInstance(Main.WINDOW_WIDTH, Main.WINODW_HEIGHT, 0);
+    static Image scaledGameOverImg = gameOverImg.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
 
     static Image startscreen = Toolkit.getDefaultToolkit().createImage("src/com/company/PacMan-Start _Screen.png");
-    static Image scaledStartscreen = startscreen.getScaledInstance(Main.WINDOW_WIDTH, Main.WINODW_HEIGHT, 0);
+    static Image scaledStartscreen = startscreen.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
 
     static Image startscreenSpace = Toolkit.getDefaultToolkit().createImage("src/com/company/PacMan-Start _Screen-Space.png");
-    static Image scaledStartscreenSpace = startscreenSpace.getScaledInstance(Main.WINDOW_WIDTH, Main.WINODW_HEIGHT, 0);
+    static Image scaledStartscreenSpace = startscreenSpace.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
 
 
-    static Obstacle[] obstacles = new Obstacle[10];
+    static Obstacle[] obstacles = new Obstacle[100];
 
     static int frame = 0;
 
@@ -49,57 +49,95 @@ public class Window extends JPanel implements KeyListener {
 
         obstacles[0].posx = 0;
         obstacles[0].posy = 0;
-        obstacles[0].width = 100;
-        obstacles[0].height = 300;
+        obstacles[0].width = 50;
+        obstacles[0].height = 150;
 
         obstacles[1].posx = 0;
-        obstacles[1].posy = 200;
-        obstacles[1].width = 400;
-        obstacles[1].height = 200;
+        obstacles[1].posy = 100;
+        obstacles[1].width = 200;
+        obstacles[1].height = 100;
 
-        obstacles[2].posx = 200;
+        obstacles[2].posx = 100;
         obstacles[2].posy = 0;
-        obstacles[2].width = 400;
-        obstacles[2].height = 100;
+        obstacles[2].width = 200;
+        obstacles[2].height = 50;
 
-        obstacles[3].posx = 500;
-        obstacles[3].posy = 200;
-        obstacles[3].width = 100;
-        obstacles[3].height = 200;
+        obstacles[3].posx = 250;
+        obstacles[3].posy = 100;
+        obstacles[3].width = 50;
+        obstacles[3].height = 100;
 
         obstacles[4].posx = 0;
-        obstacles[4].posy = 500;
-        obstacles[4].width = 400;
-        obstacles[4].height = 100;
+        obstacles[4].posy = 250;
+        obstacles[4].width = 200;
+        obstacles[4].height = 50;
 
         obstacles[5].posx = 0;
-        obstacles[5].posy = 600;
-        obstacles[5].width = 100;
-        obstacles[5].height = 400;
+        obstacles[5].posy = 250;
+        obstacles[5].width = 50;
+        obstacles[5].height = 250;
 
-        obstacles[6].posx = 200;
-        obstacles[6].posy = 900;
-        obstacles[6].width = 400;
-        obstacles[6].height = 100;
+        obstacles[6].posx = 100;
+        obstacles[6].posy = 450;
+        obstacles[6].width = 200;
+        obstacles[6].height = 50;
 
-        obstacles[7].posx = 200;
-        obstacles[7].posy = 700;
-        obstacles[7].width = 400;
-        obstacles[7].height = 100;
+        obstacles[7].posx = 100;
+        obstacles[7].posy = 350;
+        obstacles[7].width = 200;
+        obstacles[7].height = 50;
+
+        obstacles[8].posx = 1300;
+        obstacles[8].posy = 900;
+        obstacles[8].width = 50;
+        obstacles[8].height = 150;
+
+        obstacles[9].posx = 0;
+        obstacles[9].posy = 100;
+        obstacles[9].width = 200;
+        obstacles[9].height = 100;
+
+        obstacles[10].posx = 100;
+        obstacles[10].posy = 0;
+        obstacles[10].width = 200;
+        obstacles[10].height = 50;
+
+        obstacles[11].posx = 250;
+        obstacles[11].posy = 100;
+        obstacles[11].width = 50;
+        obstacles[11].height = 100;
+
+        obstacles[12].posx = 0;
+        obstacles[12].posy = 250;
+        obstacles[12].width = 200;
+        obstacles[12].height = 50;
+
+        obstacles[13].posx = 0;
+        obstacles[13].posy = 250;
+        obstacles[13].width = 50;
+        obstacles[13].height = 250;
+
+        obstacles[14].posx = 100;
+        obstacles[14].posy = 450;
+        obstacles[14].width = 200;
+        obstacles[14].height = 50;
+
+        obstacles[15].posx = 100;
+        obstacles[15].posy = 350;
+        obstacles[15].width = 200;
+        obstacles[15].height = 50;
     }
 
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        SleepRefresh();
 
         if (Main.gamestatus == 1) {
-            //g.drawImage(scaledImage, 0, 0, this);
 
             //background
-            g.setColor(Color.black);
-            g.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINODW_HEIGHT);
+            g.setColor(new Color(7, 7, 7));
+            g.fillRect(0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT);
 
             for (int i = 0; i < obstacles.length; i++) obstacles[i].draw(g);
             for (int i = 0; i < Ghosts.length; i++) {
@@ -114,15 +152,19 @@ public class Window extends JPanel implements KeyListener {
         } else if (Main.gamestatus == 0){
             g.drawImage(scaledGameOverImg, 0, 0, this);
         } else if (Main.gamestatus == 2){
-            if (frame <= 5) g.drawImage(scaledStartscreen, 0,0, this);
-            else if (frame > 5) g.drawImage(scaledStartscreenSpace, 0,0, this);
+            if (frame <= 10) g.drawImage(scaledStartscreen, 0,0, this);
+            else if (frame > 10) g.drawImage(scaledStartscreenSpace, 0,0, this);
         } else {
             System.out.println("Something is very wrong!!");
         }
 
-        frame %= 10;
+        frame %= 20;
         frame++;
 
+        g.setColor(Color.white);
+        g.drawRoundRect(0, 0, Main.GAME_WIDTH-1, Main.GAME_HEIGHT-1, 30, 30);
+
+        SleepRefresh();
     }
 
     void SleepRefresh() {
