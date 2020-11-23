@@ -18,16 +18,16 @@ public class Window extends JPanel implements KeyListener {
     static boolean[] Keys = new boolean[4];
 
     static Image backgroundimg = Toolkit.getDefaultToolkit().createImage("src/com/company/index.png");
-    static Image scaledImage = backgroundimg.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
+    static Image scaledImage = backgroundimg.getScaledInstance(Main.WINDOW_WIDTH, Main.WINODW_HEIGHT, 0);
 
     static Image gameOverImg = Toolkit.getDefaultToolkit().createImage("src/com/company/GameOver.png");
-    static Image scaledGameOverImg = gameOverImg.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
+    static Image scaledGameOverImg = gameOverImg.getScaledInstance(Main.WINDOW_WIDTH, Main.WINODW_HEIGHT, 0);
 
     static Image startscreen = Toolkit.getDefaultToolkit().createImage("src/com/company/PacMan-Start _Screen.png");
-    static Image scaledStartscreen = startscreen.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
+    static Image scaledStartscreen = startscreen.getScaledInstance(Main.WINDOW_WIDTH, Main.WINODW_HEIGHT, 0);
 
     static Image startscreenSpace = Toolkit.getDefaultToolkit().createImage("src/com/company/PacMan-Start _Screen-Space.png");
-    static Image scaledStartscreenSpace = startscreenSpace.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
+    static Image scaledStartscreenSpace = startscreenSpace.getScaledInstance(Main.WINDOW_WIDTH, Main.WINODW_HEIGHT, 0);
 
 
     static Obstacle[] obstacles = new Obstacle[10];
@@ -49,28 +49,43 @@ public class Window extends JPanel implements KeyListener {
 
         obstacles[0].posx = 0;
         obstacles[0].posy = 0;
-        obstacles[0].width = 50;
-        obstacles[0].height = 150;
+        obstacles[0].width = 100;
+        obstacles[0].height = 300;
 
-        obstacles[1].posx = 50;
-        obstacles[1].posy = 100;
-        obstacles[1].width = 100;
-        obstacles[1].height = 50;
+        obstacles[1].posx = 0;
+        obstacles[1].posy = 200;
+        obstacles[1].width = 400;
+        obstacles[1].height = 200;
 
-        obstacles[2].posx = 0;
-        obstacles[2].posy = 200;
-        obstacles[2].width = 150;
-        obstacles[2].height = 50;
+        obstacles[2].posx = 200;
+        obstacles[2].posy = 0;
+        obstacles[2].width = 400;
+        obstacles[2].height = 100;
 
-        obstacles[3].posx = 150;
-        obstacles[3].posy = 100;
-        obstacles[3].width = 50;
-        obstacles[3].height = 150;
+        obstacles[3].posx = 500;
+        obstacles[3].posy = 200;
+        obstacles[3].width = 100;
+        obstacles[3].height = 200;
 
-        obstacles[4].posx = 100;
-        obstacles[4].posy = 0;
-        obstacles[4].width = 100;
-        obstacles[4].height = 50;
+        obstacles[4].posx = 0;
+        obstacles[4].posy = 500;
+        obstacles[4].width = 400;
+        obstacles[4].height = 100;
+
+        obstacles[5].posx = 0;
+        obstacles[5].posy = 600;
+        obstacles[5].width = 100;
+        obstacles[5].height = 400;
+
+        obstacles[6].posx = 200;
+        obstacles[6].posy = 900;
+        obstacles[6].width = 400;
+        obstacles[6].height = 100;
+
+        obstacles[7].posx = 200;
+        obstacles[7].posy = 700;
+        obstacles[7].width = 400;
+        obstacles[7].height = 100;
     }
 
 
@@ -84,25 +99,17 @@ public class Window extends JPanel implements KeyListener {
 
             //background
             g.setColor(Color.black);
-            g.fillRect(0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT);
-
-            //drawing the map
-            /*g.setColor(Color.blue);
-            g.fillRect(0, 0, 100, 200);
-            g.fillRect(100, 100, 200, 100);
-            g.fillRect(400, 0, 100, 200);*/
+            g.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINODW_HEIGHT);
 
             for (int i = 0; i < obstacles.length; i++) obstacles[i].draw(g);
             for (int i = 0; i < Ghosts.length; i++) {
                 Ghosts[i].Movement();
+                Ghosts[i].draw(g, Ghosts[i].color);
             }
 
             Pacman.Movement();
             Pacman.drawPlayer(g);
-
-            for (int i = 0; i < Ghosts.length; i++) {
-                Ghosts[i].draw(g, Ghosts[i].color);
-            }
+            //System.out.println("Pacman pos x=" + Pacman.x + ";pos y=" + Pacman.y);
 
         } else if (Main.gamestatus == 0){
             g.drawImage(scaledGameOverImg, 0, 0, this);
@@ -115,6 +122,7 @@ public class Window extends JPanel implements KeyListener {
 
         frame %= 10;
         frame++;
+
     }
 
     void SleepRefresh() {
@@ -171,13 +179,15 @@ public class Window extends JPanel implements KeyListener {
         if (arg0.getKeyCode() == KeyEvent.VK_SPACE) {
             Main.gamestatus = 1;
             System.out.println("Restart");
-            Pacman.x = 100;
-            Pacman.y = 50;
+            Pacman.x = Pacman.startx;
+            Pacman.y = Pacman.starty;
             Pacman.dir = "";
             Pacman.nextdir = "";
             for (int i = 0; i < Ghosts.length; i++){
                 Ghosts[i].posx = 500;
                 Ghosts[i].posy = 100;
+                Ghosts[i].dir = "";
+                Ghosts[i].nextdir = "";
             }
 
         }
