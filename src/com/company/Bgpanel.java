@@ -13,7 +13,7 @@ public class Bgpanel extends JPanel {
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         g.setColor(Color.pink);
-        g.fillRect(0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT);
+        g.fillRect(0, 0, Main.WINDOW_WIDTH, Main.WINDOW_HEIGHT);
     }
 
 }
