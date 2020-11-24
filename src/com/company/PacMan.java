@@ -4,11 +4,12 @@ import java.awt.*;
 import java.awt.Graphics;
 
 public class PacMan {
-    int startx = 50, starty = 50, vel = 10;
+    int startx = 650, starty = 150, vel = 5;
     int x = startx, y = starty, size = 50;
     String dir = "";
     String nextdir = "";
     boolean movable = true;
+    int score;
 
     public PacMan() {
 
@@ -43,16 +44,16 @@ public class PacMan {
         if (!this.movable) {
             switch (this.dir){
                 case "down":
-                    y -= 10;
+                    y -= vel;
                     break;
                 case "up":
-                    y += 10;
+                    y += vel;
                     break;
                 case "right":
-                    x -= 10;
+                    x -= vel;
                     break;
                 case "left":
-                    x += 10;
+                    x += vel;
                     break;
             }
             this.movable = true;
@@ -77,5 +78,11 @@ public class PacMan {
     void drawPlayer(Graphics g) {
         g.setColor(Color.yellow);
         g.fillOval(x, y, size, size);
+    }
+
+    void drawScore(Graphics g) {
+        g.setColor(Color.white);
+        Graphics2D g2d = (Graphics2D)g;
+        g2d.drawString("score: " + this.score, 650, 500);
     }
 }

@@ -2,6 +2,7 @@ package com.company;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLOutput;
 
 public class Main extends Frame {
 
@@ -26,7 +27,11 @@ public class Main extends Frame {
         Frame.getContentPane().setBackground(Color.black);
 
         Window panel = new Window();
-        Frame.add(panel, BorderLayout.CENTER);
+        Frame.add(panel);
+
+        JLabel label1 = new JLabel("test");
+
+        //Frame.setLayout(null);
 
         panel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 
