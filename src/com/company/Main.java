@@ -5,9 +5,11 @@ import java.awt.*;
 
 public class Main extends Frame {
 
-    static int WINDOW_WIDTH = 1900;
-    static int WINODW_HEIGHT = 1000;
+    static int GAME_WIDTH = 1350;
+    static int GAME_HEIGHT = 800;
 
+    static int WINDOW_WIDTH = 1920;
+    static int WINDOW_HEIGHT = 1080;
 
     /*
     gamestatus 0 = game over
@@ -20,13 +22,19 @@ public class Main extends Frame {
         JFrame Frame = new JFrame();
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Frame.setTitle("Pacman");
-        Frame.setSize(WINDOW_WIDTH, WINODW_HEIGHT);
+        Frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        Frame.getContentPane().setBackground(Color.black);
 
         Window panel = new Window();
+        Frame.add(panel, BorderLayout.CENTER);
 
-        Frame.add(panel,BorderLayout.CENTER);
-        /*Frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-        Frame.setUndecorated(true);*/
+        panel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
+
+        Container contentPane = Frame.getContentPane();
+        contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 40,(WINDOW_HEIGHT - GAME_HEIGHT) / 2));
+
+        Frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        Frame.setUndecorated(true);
         Frame.setVisible(true);
 
         String filepath = "src/com/company/PacMan-ThemeSong.wav";
