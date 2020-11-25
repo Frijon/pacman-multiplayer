@@ -51,9 +51,6 @@ public class Ghost {
     Image orangeLeftscaledImage = orangeLeft.getScaledInstance(50,50, 0);
 
 
-
-
-
     public Ghost(String color) {
         switch (color) {
             case "blue":
@@ -85,7 +82,7 @@ public class Ghost {
         int randomInt = 0;
 
         if (Window.Ghosts[Window.ghostnumber - 1] != this) {
-            if (counter % 25 == 0) {
+            if (counter % 10 == 0) {
                 if (counter % 3 == 0) {
                     randomGhost = ((int) (Math.random() * 4) + 1);
                     randomInt = ((int) (Math.random() * 4) + 1);
@@ -102,7 +99,6 @@ public class Ghost {
                     System.out.println("movement updated");
                 }
             }
-
             counter++;
             counter %= 200;
         }
@@ -127,11 +123,6 @@ public class Ghost {
                 this.movable = true;
         }
 
-       /* for (int i = 0; i < Window.Ghosts.length; i++){
-            if (Window.Ghosts[i] == this) continue;
-            if ((this.posx < Window.Ghosts[i].posx + Window.Ghosts[i].size) && (this.posx + this.size > Window.Ghosts[i].posx) && (this.posy < Window.Ghosts[i].posy + Window.Ghosts[i].size) && (this.posy + this.size > Window.Ghosts[i].posy)) this.movable = false;
-        }*/
-
         if (this.posx < 0) this.movable = false;
         if (this.posx + this.size > Main.GAME_WIDTH) this.movable = false;
         if (this.posy < 0) this.movable = false;
@@ -153,90 +144,46 @@ public class Ghost {
     void draw(Graphics g, String color) {
         Graphics2D g2d = (Graphics2D) g;
         switch (color) {
-
-            case "blue":
-                switch (this.dir){
-                    case "up":
-                        g.drawImage(blueUpscaledImage, posx, posy, null );
-                        break;
-                    case "right":
-                        g.drawImage(blueRightscaledImage, posx, posy, null );
-                        break;
-                    case "down":
-                        g.drawImage(blueDownscaledImage, posx, posy, null );
-                        break;
-                    case "left":
-                        g.drawImage(blueLeftscaledImage, posx, posy, null );
-                        break;
-                    default:
-                        g.drawImage(blueUpscaledImage, posx, posy, null );
-                }
-               g.setColor(Color.black);
-                g2d.drawString("1", ((this.posx + this.size / 2) -3),  (this.posy + this.size / 2) +14);
-                break;
-            case "red":
-              //  g.setColor(Color.red);
-              //  g.fillRect(posx, posy, size, size);
-                switch (this.dir){
-                    case "up":
-                        g.drawImage(redUpscaledImage, posx, posy, null );
-                        break;
-                    case "right":
-                        g.drawImage(redRightscaledImage, posx, posy, null );
-                        break;
-                    case "down":
-                        g.drawImage(redDownscaledImage, posx, posy, null );
-                        break;
-                    case "left":
-                        g.drawImage(redLeftscaledImage, posx, posy, null );
-                        break;
-                    default:
-                        g.drawImage(redUpscaledImage, posx, posy, null );
+            case "blue" -> {
+                switch (this.dir) {
+                    case "right" -> g.drawImage(blueRightscaledImage, posx, posy, null);
+                    case "down" -> g.drawImage(blueDownscaledImage, posx, posy, null);
+                    case "left" -> g.drawImage(blueLeftscaledImage, posx, posy, null);
+                    default -> g.drawImage(blueUpscaledImage, posx, posy, null);
                 }
                 g.setColor(Color.black);
-                g2d.drawString("2", ((this.posx + this.size / 2) -3),  (this.posy + this.size / 2) +14);
-                break;
-            case "pink":
-                switch (this.dir){
-                    case "up":
-                        g.drawImage(orangeUpscaledImage, posx, posy, null );
-                        break;
-                    case "right":
-                        g.drawImage(orangeRightscaledImage, posx, posy, null );
-                        break;
-                    case "down":
-                        g.drawImage(orangeDownscaledImage, posx, posy, null );
-                        break;
-                    case "left":
-                        g.drawImage(orangeLeftscaledImage, posx, posy, null );
-                        break;
-                    default:
-                        g.drawImage(orangeUpscaledImage, posx, posy, null );
+                g2d.drawString("1", ((this.posx + this.size / 2) - 3), (this.posy + this.size / 2) + 14);
+            }
+            case "red" -> {
+                switch (this.dir) {
+                    case "right" -> g.drawImage(redRightscaledImage, posx, posy, null);
+                    case "down" -> g.drawImage(redDownscaledImage, posx, posy, null);
+                    case "left" -> g.drawImage(redLeftscaledImage, posx, posy, null);
+                    default -> g.drawImage(redUpscaledImage, posx, posy, null);
                 }
                 g.setColor(Color.black);
-                g2d.drawString("3", ((this.posx + this.size / 2) -3),  (this.posy + this.size / 2) +14);
-                break;
-            case "green":
-                switch (this.dir){
-                    case "up":
-                        g.drawImage(greenUpscaledImage, posx, posy, null );
-                        break;
-                    case "right":
-                        g.drawImage(greenRightscaledImage, posx, posy, null );
-                        break;
-                    case "down":
-                        g.drawImage(greenDownscaledImage, posx, posy, null );
-                        break;
-                    case "left":
-                        g.drawImage(greenLeftscaledImage, posx, posy, null );
-                        break;
-                    default:
-                        g.drawImage(greenUpscaledImage, posx, posy, null );
+                g2d.drawString("2", ((this.posx + this.size / 2) - 3), (this.posy + this.size / 2) + 14);
+            }
+            case "pink" -> {
+                switch (this.dir) {
+                    case "right" -> g.drawImage(orangeRightscaledImage, posx, posy, null);
+                    case "down" -> g.drawImage(orangeDownscaledImage, posx, posy, null);
+                    case "left" -> g.drawImage(orangeLeftscaledImage, posx, posy, null);
+                    default -> g.drawImage(orangeUpscaledImage, posx, posy, null);
                 }
                 g.setColor(Color.black);
-                g2d.drawString("4", ((this.posx + this.size / 2) -3),  (this.posy + this.size / 2) +14);
-                break;
-
+                g2d.drawString("3", ((this.posx + this.size / 2) - 3), (this.posy + this.size / 2) + 14);
+            }
+            case "green" -> {
+                switch (this.dir) {
+                    case "right" -> g.drawImage(greenRightscaledImage, posx, posy, null);
+                    case "down" -> g.drawImage(greenDownscaledImage, posx, posy, null);
+                    case "left" -> g.drawImage(greenLeftscaledImage, posx, posy, null);
+                    default -> g.drawImage(greenUpscaledImage, posx, posy, null);
+                }
+                g.setColor(Color.black);
+                g2d.drawString("4", ((this.posx + this.size / 2) - 3), (this.posy + this.size / 2) + 14);
+            }
         }
 
     }
