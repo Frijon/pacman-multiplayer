@@ -29,6 +29,10 @@ public class Window extends JPanel implements KeyListener {
     static Image startscreenSpace = Toolkit.getDefaultToolkit().createImage("src/com/company/PacMan-Start _Screen-Space.png");
     static Image scaledStartscreenSpace = startscreenSpace.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
 
+    static Image cyanGhostUp = Toolkit.getDefaultToolkit().createImage("src/com/company/Cyan_Up.png");
+    static Image scaledcyanGhostUp = cyanGhostUp.getScaledInstance(200, 200, 0);
+
+
 
     static Obstacle[] obstacles = new Obstacle[56];
 
@@ -461,6 +465,7 @@ public class Window extends JPanel implements KeyListener {
 
 
     }
+
 
 
 }
