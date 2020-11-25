@@ -16,31 +16,28 @@ public class Main extends Frame {
     gamestatus 0 = game over
     gamestatus 1 = game running
     gamestatus 2 = startscreen
+    gamestatus 3 = rule explanation
      */
     static int gamestatus = 2;
 
     public static void main(String[] args) {
-        JFrame Frame = new JFrame();
-        Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Frame.setTitle("Pacman");
-        Frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
-        Frame.getContentPane().setBackground(Color.black);
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setTitle("Pacman");
+        frame.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
+        frame.getContentPane().setBackground(Color.black);
 
         Window panel = new Window();
-        Frame.add(panel);
-
-        JLabel label1 = new JLabel("test");
-
-        //Frame.setLayout(null);
+        frame.add(panel);
 
         panel.setPreferredSize(new Dimension(GAME_WIDTH, GAME_HEIGHT));
 
-        Container contentPane = Frame.getContentPane();
+        Container contentPane = frame.getContentPane();
         contentPane.setLayout(new FlowLayout(FlowLayout.CENTER, 40,(WINDOW_HEIGHT - GAME_HEIGHT) / 2));
 
-        Frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-        Frame.setUndecorated(true);
-        Frame.setVisible(true);
+        frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+        frame.setUndecorated(true);
+        frame.setVisible(true);
 
         String filepath = "src/com/company/PacMan-ThemeSong.wav";
         Music musicObject = new Music();
