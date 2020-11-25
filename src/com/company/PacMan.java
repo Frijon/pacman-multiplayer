@@ -1,7 +1,6 @@
 package com.company;
 
 import java.awt.*;
-import java.awt.Graphics;
 
 public class PacMan {
     int startx = 650, starty = 150, vel = 5;
@@ -10,6 +9,36 @@ public class PacMan {
     String nextdir = "";
     boolean movable = true;
     int score;
+    int frame = 1;
+    int animationCounter = 0;
+
+    Image Up1 = Toolkit.getDefaultToolkit().createImage("src/com/company/Up1.png");
+    Image Up1scaledImage = Up1.getScaledInstance(50,50, 0);
+    Image Up2 = Toolkit.getDefaultToolkit().createImage("src/com/company/Up2.png");
+    Image Up2scaledImage = Up2.getScaledInstance(50,50, 0);
+    Image Up3 = Toolkit.getDefaultToolkit().createImage("src/com/company/3.png");
+    Image Up3scaledImage = Up3.getScaledInstance(50,50, 0);
+
+    Image Right1 = Toolkit.getDefaultToolkit().createImage("src/com/company/Right1.png");
+    Image Right1scaledImage = Right1.getScaledInstance(50,50, 0);
+    Image Right2 = Toolkit.getDefaultToolkit().createImage("src/com/company/Right2.png");
+    Image Right2scaledImage = Right2.getScaledInstance(50,50, 0);
+    Image Right3 = Toolkit.getDefaultToolkit().createImage("src/com/company/3.png");
+    Image Right3scaledImage = Right3.getScaledInstance(50,50, 0);
+
+    Image Down1 = Toolkit.getDefaultToolkit().createImage("src/com/company/Down1.png");
+    Image Down1scaledImage = Down1.getScaledInstance(50,50, 0);
+    Image Down2 = Toolkit.getDefaultToolkit().createImage("src/com/company/Down2.png");
+    Image Down2scaledImage = Down2.getScaledInstance(50,50, 0);
+    Image Down3 = Toolkit.getDefaultToolkit().createImage("src/com/company/3.png");
+    Image Down3scaledImage = Down3.getScaledInstance(50,50, 0);
+
+    Image Left1 = Toolkit.getDefaultToolkit().createImage("src/com/company/Left1.png");
+    Image Left1scaledImage = Left1.getScaledInstance(50,50, 0);
+    Image Left2 = Toolkit.getDefaultToolkit().createImage("src/com/company/Left2.png");
+    Image Left2scaledImage = Left2.getScaledInstance(50,50, 0);
+    Image Left3 = Toolkit.getDefaultToolkit().createImage("src/com/company/3.png");
+    Image Left3scaledImage = Left3.getScaledInstance(50,50, 0);
 
     public PacMan() {
 
@@ -24,6 +53,7 @@ public class PacMan {
                 switch (this.dir) {
                     case "up":
                         y -= vel;
+
                         break;
                     case "down":
                         y += vel;
@@ -45,6 +75,7 @@ public class PacMan {
             switch (this.dir){
                 case "down":
                     y -= vel;
+
                     break;
                 case "up":
                     y += vel;
@@ -76,13 +107,77 @@ public class PacMan {
     }
 
     void drawPlayer(Graphics g) {
-        g.setColor(Color.yellow);
-        g.fillOval(x, y, size, size);
+       // g.setColor(Color.yellow);
+       // g.fillOval(x, y, size, size);
+
+    switch (this.dir) {
+        case "up":
+
+                if (frame == 1) {
+                    g.drawImage(Up1scaledImage, x, y, null);
+                } else if (frame == 2) {
+                    g.drawImage(Up2scaledImage, x, y, null);
+                } else {
+                    g.drawImage(Up3scaledImage, x, y, null);
+                    frame = 1;
+                    return;
+                }
+                frame++;
+
+            break;
+
+        case "right":
+            if (frame == 1) {
+                g.drawImage(Right1scaledImage, x, y, null);
+            } else if (frame == 2) {
+                g.drawImage(Right2scaledImage, x, y, null);
+            } else {
+                g.drawImage(Right3scaledImage, x, y, null);
+                frame = 1;
+                return;
+            }
+            frame++;
+            break;
+
+        case "down":
+            if (frame == 1) {
+                g.drawImage(Down1scaledImage, x, y, null);
+            } else if (frame == 2) {
+                g.drawImage(Down2scaledImage, x, y, null);
+            } else {
+                g.drawImage(Down3scaledImage, x, y, null);
+                frame = 1;
+                return;
+            }
+            frame++;
+            break;
+
+        case "left":
+            if (frame == 1) {
+                g.drawImage(Left1scaledImage, x, y, null);
+            } else if (frame == 2) {
+                g.drawImage(Left2scaledImage, x, y, null);
+            } else {
+                g.drawImage(Left3scaledImage, x, y, null);
+                frame = 1;
+                return;
+            }
+            frame++;
+            break;
+
+        default:
+            g.drawImage(Up3scaledImage, x, y, null);
     }
+
+}
+
+
 
     void drawScore(Graphics g) {
         g.setColor(Color.white);
         Graphics2D g2d = (Graphics2D)g;
         g2d.drawString("score: " + this.score, 650, 500);
     }
+
+
 }

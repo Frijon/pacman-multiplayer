@@ -389,7 +389,9 @@ public class Window extends JPanel implements KeyListener {
 
     public void keyPressed(KeyEvent e) {
 
-        if (e.getKeyCode() == KeyEvent.VK_UP) Pacman.nextdir = "up";
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            Pacman.nextdir = "up";;
+        }
         if (e.getKeyCode() == KeyEvent.VK_LEFT) Pacman.nextdir = "left";
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) Pacman.nextdir = "right";
         if (e.getKeyCode() == KeyEvent.VK_DOWN) Pacman.nextdir = "down";

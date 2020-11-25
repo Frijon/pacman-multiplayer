@@ -1,8 +1,6 @@
 package com.company;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Ghost {
     int size = 50, vel = 5;
@@ -85,7 +83,7 @@ public class Ghost {
         int randomInt = 0;
 
         if (Window.Ghosts[Window.ghostnumber - 1] != this) {
-            if (counter % 25 == 0) {
+            if (counter % 10 == 0) {
                 if (counter % 3 == 0) {
                     randomGhost = ((int) (Math.random() * 4) + 1);
                     randomInt = ((int) (Math.random() * 4) + 1);
