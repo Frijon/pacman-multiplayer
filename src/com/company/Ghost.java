@@ -14,6 +14,45 @@ public class Ghost {
     boolean movable = true;
     int counter = 0;
 
+    Image blueUp = Toolkit.getDefaultToolkit().createImage("src/com/company/bUp.png");
+    Image blueUpscaledImage = blueUp.getScaledInstance(50,50, 0);
+    Image blueRight = Toolkit.getDefaultToolkit().createImage("src/com/company/bRight.png");
+    Image blueRightscaledImage = blueRight.getScaledInstance(50,50, 0);
+    Image blueDown = Toolkit.getDefaultToolkit().createImage("src/com/company/bDown.png");
+    Image blueDownscaledImage = blueDown.getScaledInstance(50,50, 0);
+    Image blueLeft = Toolkit.getDefaultToolkit().createImage("src/com/company/bLeft.png");
+    Image blueLeftscaledImage = blueLeft.getScaledInstance(50,50, 0);
+
+    Image greenUp = Toolkit.getDefaultToolkit().createImage("src/com/company/gUp.png");
+    Image greenUpscaledImage = greenUp.getScaledInstance(50,50, 0);
+    Image greenRight = Toolkit.getDefaultToolkit().createImage("src/com/company/gRight.png");
+    Image greenRightscaledImage = greenRight.getScaledInstance(50,50, 0);
+    Image greenDown = Toolkit.getDefaultToolkit().createImage("src/com/company/gDown.png");
+    Image greenDownscaledImage = greenDown.getScaledInstance(50,50, 0);
+    Image greenLeft = Toolkit.getDefaultToolkit().createImage("src/com/company/gLeft.png");
+    Image greenLeftscaledImage = greenLeft.getScaledInstance(50,50, 0);
+
+    Image redUp = Toolkit.getDefaultToolkit().createImage("src/com/company/rUp.png");
+    Image redUpscaledImage = redUp.getScaledInstance(50,50, 0);
+    Image redRight = Toolkit.getDefaultToolkit().createImage("src/com/company/rRight.png");
+    Image redRightscaledImage = redRight.getScaledInstance(50,50, 0);
+    Image redDown = Toolkit.getDefaultToolkit().createImage("src/com/company/rDown.png");
+    Image redDownscaledImage = redDown.getScaledInstance(50,50, 0);
+    Image redLeft = Toolkit.getDefaultToolkit().createImage("src/com/company/rLeft.png");
+    Image redLeftscaledImage = redLeft.getScaledInstance(50,50, 0);
+
+    Image orangeUp = Toolkit.getDefaultToolkit().createImage("src/com/company/oUp.png");
+    Image orangeUpscaledImage = orangeUp.getScaledInstance(50,50, 0);
+    Image orangeRight = Toolkit.getDefaultToolkit().createImage("src/com/company/oRight.png");
+    Image orangeRightscaledImage = orangeRight.getScaledInstance(50,50, 0);
+    Image orangeDown = Toolkit.getDefaultToolkit().createImage("src/com/company/oDown.png");
+    Image orangeDownscaledImage = orangeDown.getScaledInstance(50,50, 0);
+    Image orangeLeft = Toolkit.getDefaultToolkit().createImage("src/com/company/oLeft.png");
+    Image orangeLeftscaledImage = orangeLeft.getScaledInstance(50,50, 0);
+
+
+
+
 
     public Ghost(String color) {
         switch (color) {
@@ -114,32 +153,91 @@ public class Ghost {
     void draw(Graphics g, String color) {
         Graphics2D g2d = (Graphics2D) g;
         switch (color) {
-            case "blue" -> {
-                g.setColor(Color.cyan);
-                g.fillRect(posx, posy, size, size);
-                g.setColor(Color.black);
-                g2d.drawString("1", ((this.posx + this.size / 2) - 3), (this.posy + this.size / 2) + 3);
-            }
-            case "red" -> {
-                g.setColor(Color.red);
-                g.fillRect(posx, posy, size, size);
-                g.setColor(Color.black);
-                g2d.drawString("2", ((this.posx + this.size / 2) - 3), (this.posy + this.size / 2) + 3);
-            }
-            case "pink" -> {
-                g.setColor(Color.pink);
-                g.fillRect(posx, posy, size, size);
-                g.setColor(Color.black);
-                g2d.drawString("3", ((this.posx + this.size / 2) - 3), (this.posy + this.size / 2) + 3);
-            }
-            case "green" -> {
-                g.setColor(Color.green);
-                g.fillRect(posx, posy, size, size);
-                g.setColor(Color.black);
-                g2d.drawString("4", ((this.posx + this.size / 2) - 3), (this.posy + this.size / 2) + 3);
-            }
-        }
 
+            case "blue":
+                switch (this.dir){
+                    case "up":
+                        g.drawImage(blueUpscaledImage, posx, posy, null );
+                        break;
+                    case "right":
+                        g.drawImage(blueRightscaledImage, posx, posy, null );
+                        break;
+                    case "down":
+                        g.drawImage(blueDownscaledImage, posx, posy, null );
+                        break;
+                    case "left":
+                        g.drawImage(blueLeftscaledImage, posx, posy, null );
+                        break;
+                    default:
+                        g.drawImage(blueUpscaledImage, posx, posy, null );
+                }
+               g.setColor(Color.black);
+                g2d.drawString("1", ((this.posx + this.size / 2) -3),  (this.posy + this.size / 2) +14);
+                break;
+            case "red":
+              //  g.setColor(Color.red);
+              //  g.fillRect(posx, posy, size, size);
+                switch (this.dir){
+                    case "up":
+                        g.drawImage(redUpscaledImage, posx, posy, null );
+                        break;
+                    case "right":
+                        g.drawImage(redRightscaledImage, posx, posy, null );
+                        break;
+                    case "down":
+                        g.drawImage(redDownscaledImage, posx, posy, null );
+                        break;
+                    case "left":
+                        g.drawImage(redLeftscaledImage, posx, posy, null );
+                        break;
+                    default:
+                        g.drawImage(redUpscaledImage, posx, posy, null );
+                }
+                g.setColor(Color.black);
+                g2d.drawString("2", ((this.posx + this.size / 2) -3),  (this.posy + this.size / 2) +14);
+                break;
+            case "pink":
+                switch (this.dir){
+                    case "up":
+                        g.drawImage(orangeUpscaledImage, posx, posy, null );
+                        break;
+                    case "right":
+                        g.drawImage(orangeRightscaledImage, posx, posy, null );
+                        break;
+                    case "down":
+                        g.drawImage(orangeDownscaledImage, posx, posy, null );
+                        break;
+                    case "left":
+                        g.drawImage(orangeLeftscaledImage, posx, posy, null );
+                        break;
+                    default:
+                        g.drawImage(orangeUpscaledImage, posx, posy, null );
+                }
+                g.setColor(Color.black);
+                g2d.drawString("3", ((this.posx + this.size / 2) -3),  (this.posy + this.size / 2) +14);
+                break;
+            case "green":
+                switch (this.dir){
+                    case "up":
+                        g.drawImage(greenUpscaledImage, posx, posy, null );
+                        break;
+                    case "right":
+                        g.drawImage(greenRightscaledImage, posx, posy, null );
+                        break;
+                    case "down":
+                        g.drawImage(greenDownscaledImage, posx, posy, null );
+                        break;
+                    case "left":
+                        g.drawImage(greenLeftscaledImage, posx, posy, null );
+                        break;
+                    default:
+                        g.drawImage(greenUpscaledImage, posx, posy, null );
+                }
+                g.setColor(Color.black);
+                g2d.drawString("4", ((this.posx + this.size / 2) -3),  (this.posy + this.size / 2) +14);
+                break;
+
+        }
 
     }
 
