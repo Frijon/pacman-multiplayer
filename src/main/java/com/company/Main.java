@@ -40,7 +40,7 @@ public class Main extends Frame {
         frame.setVisible(true);
 
         Music musicObject = new Music();
-        musicObject.playMusic();
+        //musicObject.playMusic();
     }
 
 

@@ -1,7 +1,9 @@
 package com.company;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.Graphics;
+import java.io.IOException;
 
 public class PacMan {
     int startx = 650, starty = 150;
@@ -9,11 +11,47 @@ public class PacMan {
     int x = startx, y = starty;
     int size = 50;
 
+    int frame = 1;
+
     String dir = "";
     String nextDir = "";
 
     boolean movable = true;
     int score;
+
+    static Image up1;
+    static Image up2;
+    static Image up3;
+
+    static Image right1;
+    static Image right2;
+
+    static Image down1;
+    static Image down2;
+
+    static Image left1;
+    static Image left2;
+
+
+    static {
+        try {
+            up1 = ImageIO.read(Ghost.class.getResource("/Up1.png"));
+            up2 = ImageIO.read(Ghost.class.getResource("/Up2.png"));
+            up3 = ImageIO.read(Ghost.class.getResource("/3.png"));
+
+            right1 = ImageIO.read(Ghost.class.getResource("/Right1.png"));
+            right2 = ImageIO.read(Ghost.class.getResource("/Right2.png"));
+
+            down1 = ImageIO.read(Ghost.class.getResource("/Down1.png"));
+            down2 = ImageIO.read(Ghost.class.getResource("/Down2.png"));
+
+            left1 = ImageIO.read(Ghost.class.getResource("/Left1.png"));
+            left2 = ImageIO.read(Ghost.class.getResource("/Left2.png"));
+
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+    }
 
     public PacMan() {
     }
@@ -62,8 +100,57 @@ public class PacMan {
     }
 
     void drawPlayer(Graphics g) {
-        g.setColor(Color.yellow);
-        g.fillOval(x, y, size, size);
+        switch (this.dir) {
+            case "up" -> {
+                if (frame == 1) {
+                    g.drawImage(up1, x, y, size, size, null);
+                } else if (frame == 2) {
+                    g.drawImage(up2, x, y, size, size, null);
+                } else {
+                    g.drawImage(up3, x, y, size, size, null);
+                    frame = 1;
+                    return;
+                }
+                frame++;
+            }
+            case "right" -> {
+                if (frame == 1) {
+                    g.drawImage(right1, x, y, size, size, null);
+                } else if (frame == 2) {
+                    g.drawImage(right2, x, y, size, size, null);
+                } else {
+                    g.drawImage(up3, x, y, size, size, null);
+                    frame = 1;
+                    return;
+                }
+                frame++;
+            }
+            case "down" -> {
+                if (frame == 1) {
+                    g.drawImage(down1, x, y, size, size, null);
+                } else if (frame == 2) {
+                    g.drawImage(down2, x, y, size, size, null);
+                } else {
+                    g.drawImage(up3, x, y, size, size, null);
+                    frame = 1;
+                    return;
+                }
+                frame++;
+            }
+            case "left" -> {
+                if (frame == 1) {
+                    g.drawImage(left1, x, y, size, size, null);
+                } else if (frame == 2) {
+                    g.drawImage(left2, x, y, size, size, null);
+                } else {
+                    g.drawImage(up3, x, y, size, size, null);
+                    frame = 1;
+                    return;
+                }
+                frame++;
+            }
+            default -> g.drawImage(right2, x, y, size, size, null);
+        }
     }
 
     void drawScore(Graphics g) {
