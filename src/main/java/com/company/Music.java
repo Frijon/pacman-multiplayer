@@ -8,10 +8,10 @@ import java.io.File;
 
 public class Music {
 
-    public void playMusic(String musicLocation) {
+    public void playMusic() {
 
         try {
-            AudioInputStream audioInput = AudioSystem.getAudioInputStream(Music.class.getResource("PacMan-ThemeSong.wav"));
+            AudioInputStream audioInput = AudioSystem.getAudioInputStream(Music.class.getResource("/PacMan-ThemeSong.wav"));
             Clip clip = AudioSystem.getClip();
             clip.open(audioInput);
             clip.start();

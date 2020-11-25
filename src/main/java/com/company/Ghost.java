@@ -130,8 +130,6 @@ public class Ghost {
             g.drawImage(images.get(color + Character.toUpperCase(dir.charAt(0)) + dir.substring(1)), posx, posy, size, size, null);
         g.setColor(Color.black);
         g2d.drawString(Arrays.asList("blue", "red", "orange", "green").indexOf(color) + 1 + "", ((this.posx + this.size / 2) - 3), (this.posy + this.size / 2) + 14);
-
-
     }
 
 }
