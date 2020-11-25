@@ -15,8 +15,6 @@ public class Window extends JPanel implements KeyListener {
     static Ghost Pinkghost = new Ghost("pink");
     static Ghost Greenghost = new Ghost("green");
 
-    static boolean[] Keys = new boolean[4];
-
     static Image backgroundimg = Toolkit.getDefaultToolkit().createImage("src/com/company/index.png");
     static Image scaledImage = backgroundimg.getScaledInstance(Main.GAME_WIDTH, Main.GAME_HEIGHT, 0);
 
@@ -348,20 +346,20 @@ public class Window extends JPanel implements KeyListener {
 
             for (int i = 0; i < obstacles.length; i++) obstacles[i].draw(g);
             for (int i = 0; i < Ghosts.length; i++) {
-                Ghosts[i].Movement();
+                Ghosts[i].movement(i);
                 Ghosts[i].draw(g, Ghosts[i].color);
             }
 
             Pacman.Movement();
             Pacman.drawPlayer(g);
             Pacman.drawScore(g);
-            Pacman.score++;
+            if (frame % 5 == 0) Pacman.score++;
 
         } else if (Main.gamestatus == 0) {
             g.drawImage(scaledGameOverImg, 0, 0, this);
         } else if (Main.gamestatus == 2) {
             if (frame <= 10) g.drawImage(scaledStartscreen, 0, 0, this);
-            else if (frame > 10) g.drawImage(scaledStartscreenSpace, 0, 0, this);
+            else g.drawImage(scaledStartscreenSpace, 0, 0, this);
         } else if (Main.gamestatus == 3) {
             g.setColor(Color.black);
             g.fillRect(0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT);
@@ -389,52 +387,26 @@ public class Window extends JPanel implements KeyListener {
         repaint();
     }
 
-    public void keyPressed(KeyEvent arg0) {
+    public void keyPressed(KeyEvent e) {
 
-        if (arg0.getKeyCode() == KeyEvent.VK_UP) {
-            Keys[0] = true;
-            Pacman.nextdir = "up";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_LEFT) {
-            Keys[1] = true;
-            Pacman.nextdir = "left";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_RIGHT) {
-            Keys[2] = true;
-            Pacman.nextdir = "right";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_DOWN) {
-            Keys[3] = true;
-            Pacman.nextdir = "down";
-        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) Pacman.nextdir = "up";
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) Pacman.nextdir = "left";
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) Pacman.nextdir = "right";
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) Pacman.nextdir = "down";
 
-        if (arg0.getKeyCode() == KeyEvent.VK_1) ghostnumber = 1;
-        if (arg0.getKeyCode() == KeyEvent.VK_2) ghostnumber = 2;
-        if (arg0.getKeyCode() == KeyEvent.VK_3) ghostnumber = 3;
-        if (arg0.getKeyCode() == KeyEvent.VK_4) ghostnumber = 4;
+        if (e.getKeyCode() == KeyEvent.VK_1) ghostnumber = 1;
+        if (e.getKeyCode() == KeyEvent.VK_2) ghostnumber = 2;
+        if (e.getKeyCode() == KeyEvent.VK_3) ghostnumber = 3;
+        if (e.getKeyCode() == KeyEvent.VK_4) ghostnumber = 4;
 
+        if (e.getKeyCode() == KeyEvent.VK_W) Ghosts[ghostnumber - 1].nextdir = "up";
+        if (e.getKeyCode() == KeyEvent.VK_A) Ghosts[ghostnumber - 1].nextdir = "left";
+        if (e.getKeyCode() == KeyEvent.VK_D) Ghosts[ghostnumber - 1].nextdir = "right";
+        if (e.getKeyCode() == KeyEvent.VK_S) Ghosts[ghostnumber - 1].nextdir = "down";
 
-        if (arg0.getKeyCode() == KeyEvent.VK_W) {
-            Keys[0] = true;
-            Ghosts[ghostnumber - 1].nextdir = "up";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_A) {
-            Keys[1] = true;
-            Ghosts[ghostnumber - 1].nextdir = "left";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_D) {
-            Keys[2] = true;
-            Ghosts[ghostnumber - 1].nextdir = "right";
-        }
-        if (arg0.getKeyCode() == KeyEvent.VK_S) {
-            Keys[3] = true;
-            Ghosts[ghostnumber - 1].nextdir = "down";
-        }
-
-        if (arg0.getKeyCode() == KeyEvent.VK_SPACE) {
-            if (Main.gamestatus == 3) {
+        if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+            if (Main.gamestatus == 3 || Main.gamestatus == 0) {
                 Main.gamestatus = 1;
-                System.out.println("Restart");
                 Pacman.x = Pacman.startx;
                 Pacman.y = Pacman.starty;
                 Pacman.dir = "";
@@ -446,26 +418,34 @@ public class Window extends JPanel implements KeyListener {
                     Ghosts[i].dir = "";
                     Ghosts[i].nextdir = "";
                 }
-            } else if (Main.gamestatus == 2) {
-                Main.gamestatus = 3;
+            } else if (Main.gamestatus == 2) Main.gamestatus = 3;
+        }
+
+        if (e.isAltDown() && e.getKeyCode() == KeyEvent.VK_Q) System.exit(0);
+        if (e.isAltDown() && e.getKeyCode() == KeyEvent.VK_R) {
+            Main.gamestatus = 1;
+            Pacman.x = Pacman.startx;
+            Pacman.y = Pacman.starty;
+            Pacman.dir = "";
+            Pacman.nextdir = "";
+            Pacman.score = 0;
+            for (int i = 0; i < Ghosts.length; i++) {
+                Ghosts[i].posx = Ghosts[i].startposx;
+                Ghosts[i].posy = Ghosts[i].startposy;
+                Ghosts[i].dir = "";
+                Ghosts[i].nextdir = "";
             }
         }
+    }
 
-        if (arg0.getKeyCode() == KeyEvent.VK_B) {
-            System.exit(0);
+        public void keyReleased (KeyEvent arg0){
+
         }
 
-    }
-
-    public void keyReleased(KeyEvent arg0) {
-
-    }
-
-    public void keyTyped(KeyEvent arg0) {
+        public void keyTyped (KeyEvent arg0){
 
 
-    }
-
-
+        }
 
 }
+
