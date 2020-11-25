@@ -4,22 +4,53 @@ import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLOutput;
 
+/**
+ * A pacman game for two players created as a school project.
+ *
+ * @author Elias Görlitz
+ * @author Luis Korda
+ */
+
+/**
+ * The Main class.
+ */
 public class Main extends Frame {
 
+
+    /**
+     * The Game width.
+     */
     static int GAME_WIDTH = 1350;
+    /**
+     * The Game height.
+     */
     static int GAME_HEIGHT = 800;
 
+    /**
+     * The Window width.
+     */
     static int WINDOW_WIDTH = 1920;
+    /**
+     * The Window height.
+     */
     static int WINDOW_HEIGHT = 1080;
 
-    /*
-    gamestatus 0 = game over
+    /**
+     * The gamestatus.
+     */
+
+  /*gamestatus 0 = game over
     gamestatus 1 = game running
     gamestatus 2 = startscreen
     gamestatus 3 = rule explanation
      */
     static int gamestatus = 2;
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

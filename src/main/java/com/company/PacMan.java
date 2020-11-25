@@ -5,34 +5,72 @@ import java.awt.*;
 import java.awt.Graphics;
 import java.io.IOException;
 
+/**
+ * The class pacman, which is controlled by one player.
+ */
 public class PacMan {
-    int startx = 650, starty = 150;
+    /**
+     * The starting x position.
+     */
+    int startx = 650, /**
+     * The starting y position.
+     */
+    starty = 150;
+    /**
+     * The movement velocity of the pacman.
+     */
     int vel = 5;
-    int x = startx, y = starty;
+    /**
+     * The x position of the pacman.
+     */
+    int x = startx, /**
+     * The y position.
+     */
+    y = starty;
+    /**
+     * The size of the pacman.
+     */
     int size = 50;
 
+    /**
+     * A frame counter variable for the animation.
+     */
     int frame = 1;
 
+    /**
+     * The direction of the pacman.
+     */
     String dir = "";
+    /**
+     * The next direction of the pacman which is going to be set to the current direction as soon as the x or y pos % 50 is 0.
+     */
     String nextDir = "";
 
+    /**
+     * The variable "movable" which indicates if the pacman is moving.
+     */
     boolean movable = true;
+    /**
+     * The score which is calculated by the time alive of the pacman.
+     */
     int score;
 
+    /**
+     * Initialization of the variables for the images.
+     */
     static Image up1;
     static Image up2;
     static Image up3;
-
     static Image right1;
     static Image right2;
-
     static Image down1;
     static Image down2;
-
     static Image left1;
     static Image left2;
 
-
+    /**
+     * Loading all the pacman images.
+     */
     static {
         try {
             up1 = ImageIO.read(Ghost.class.getResource("/Up1.png"));
@@ -53,9 +91,15 @@ public class PacMan {
         }
     }
 
+    /**
+     * Instantiates a new pacman.
+     */
     public PacMan() {
     }
 
+    /**
+     * Movement for the pacman, it checks for borders, obstacles and for collision with the ghosts.
+     */
     void movement() {
 
         if (this.movable) {
@@ -99,6 +143,10 @@ public class PacMan {
         }
     }
 
+    /**
+     * Drawing the player, depending on the movement direction.
+     * @param g the Graphics to be able to draw.
+     */
     void drawPlayer(Graphics g) {
         switch (this.dir) {
             case "up" -> {
@@ -153,6 +201,10 @@ public class PacMan {
         }
     }
 
+    /**
+     * Drawing the score in the middle of the screen.
+     * @param g the Graphics to be able to draw.
+     */
     void drawScore(Graphics g) {
         g.setColor(Color.white);
         Graphics2D g2d = (Graphics2D)g;

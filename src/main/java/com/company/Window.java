@@ -7,22 +7,61 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 
+/**
+ * The Window class which is drawing everything and listening for key inputs.
+ */
 public class Window extends JPanel implements KeyListener {
 
+    /**
+     * The Pacman.
+     */
     static PacMan pacman = new PacMan();
+    /**
+     * The Ghostnumber which is selected by the user.
+     */
     static int ghostnumber = 1;
+    /**
+     * An Array of Ghosts.
+     */
     static Ghost[] ghosts = new Ghost[4];
+    /**
+     * The Ghosts.
+     */
     static Ghost blueghost = new Ghost("blue");
+    /**
+     * The Redghost.
+     */
     static Ghost redghost = new Ghost("red");
+    /**
+     * The Pinkghost.
+     */
     static Ghost pinkghost = new Ghost("orange");
+    /**
+     * The Greenghost.
+     */
     static Ghost greenghost = new Ghost("green");
 
+    /**
+     * Array of Obstacles.
+     */
     static Obstacle[] obstacles = new Obstacle[56];
 
+    /**
+     * Frame count for animated frames.
+     */
     static int frame = 0;
 
+    /**
+     * Loading different images for the game over screen, startscreen with the space key sign and startscreen without the sign.
+     */
     static Image gameOverImg;
+    /**
+     * The Startscreen.
+     */
     static Image startscreen;
+    /**
+     * The Startscreen space.
+     */
     static Image startscreenSpace;
 
     static {
@@ -30,11 +69,14 @@ public class Window extends JPanel implements KeyListener {
             gameOverImg = ImageIO.read(Ghost.class.getResource("/gameOver.png"));
             startscreenSpace = ImageIO.read(Ghost.class.getResource("/PacMan-Start _Screen-Space.png"));
             startscreen = ImageIO.read(Ghost.class.getResource("/PacMan-Start _Screen.png"));
-        } catch (IOException e){
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    /**
+     * Instantiates a new Window, puts the ghosts into an array and generates all obstacles.
+     */
     public Window() {
         this.addKeyListener(this);
         setFocusable(true);
@@ -329,6 +371,11 @@ public class Window extends JPanel implements KeyListener {
         obstacles[55].height = 50;
     }
 
+    /**
+     * overrides the paintComponent method from jframe and draws everything, depending on the game status.
+     *
+     * @param g containing the graphics object
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -352,8 +399,8 @@ public class Window extends JPanel implements KeyListener {
 
         } else if (Main.gamestatus == 0) g.drawImage(gameOverImg, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT, this);
         else if (Main.gamestatus == 2) {
-            if (frame <= 10) g.drawImage(startscreen, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT,this);
-            else g.drawImage(startscreenSpace, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT,this);
+            if (frame <= 10) g.drawImage(startscreen, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT, this);
+            else g.drawImage(startscreenSpace, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT, this);
         } else {
             g.setColor(Color.black);
             g.fillRect(0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT);
@@ -369,15 +416,24 @@ public class Window extends JPanel implements KeyListener {
         SleepRefresh();
     }
 
+
+    /**
+     * Redraw function.
+     */
     void SleepRefresh() {
         try {
             Thread.sleep(1000 / 30);
         } catch (Exception e) {
-            System.out.println("Sleep refresh failed! Error" + e);
+            e.printStackTrace();
         }
         repaint();
     }
 
+    /**
+     * Detecting keypresses, automatically by the JFrame.
+     *
+     * @param e the keyboard event
+     */
     public void keyPressed(KeyEvent e) {
 
         if (e.getKeyCode() == KeyEvent.VK_UP) pacman.nextDir = "up";
@@ -404,8 +460,8 @@ public class Window extends JPanel implements KeyListener {
                 pacman.nextDir = "";
                 pacman.score = 0;
                 for (int i = 0; i < ghosts.length; i++) {
-                    ghosts[i].posx = ghosts[i].startposx;
-                    ghosts[i].posy = ghosts[i].startposy;
+                    ghosts[i].posx = ghosts[i].startPosX;
+                    ghosts[i].posy = ghosts[i].startPosY;
                     ghosts[i].dir = "";
                     ghosts[i].nextdir = "";
                 }
@@ -421,21 +477,27 @@ public class Window extends JPanel implements KeyListener {
             pacman.nextDir = "";
             pacman.score = 0;
             for (Ghost ghost : ghosts) {
-                ghost.posx = ghost.startposx;
-                ghost.posy = ghost.startposy;
+                ghost.posx = ghost.startPosX;
+                ghost.posy = ghost.startPosY;
                 ghost.dir = "";
                 ghost.nextdir = "";
             }
         }
     }
 
-        public void keyReleased (KeyEvent arg0){
+    /**
+     * Unused function detecting key releases.
+     * @param arg0
+     */
+    public void keyReleased(KeyEvent arg0) {
+    }
 
-        }
-
-        public void keyTyped (KeyEvent arg0){
-
-        }
+    /**
+     * Unused function detecting typed keys.
+     * @param arg0
+     */
+    public void keyTyped(KeyEvent arg0) {
+    }
 
 }
 

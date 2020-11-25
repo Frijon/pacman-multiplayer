@@ -2,9 +2,32 @@ package com.company;
 
 import java.awt.*;
 
+/**
+ * The Obstacle class.
+ */
 public class Obstacle {
-    int posX, posY, width, height;
+    /**
+     * The Pos x.
+     */
+    int posX, /**
+     * The Pos y.
+     */
+    posY, /**
+     * The Width.
+     */
+    width, /**
+     * The Height.
+     */
+    height;
 
+    /**
+     * Instantiates a new Obstacle.
+     *
+     * @param xpos    the xpos
+     * @param ypos    the ypos
+     * @param widthx  the widthx
+     * @param heighty the heighty
+     */
     public Obstacle(int xpos,int ypos, int widthx, int heighty){
         this.posX = xpos;
         this.posY = ypos;
@@ -12,6 +35,11 @@ public class Obstacle {
         this.height = heighty;
     }
 
+    /**
+     * Draw.
+     *
+     * @param g the Graphics object.
+     */
     void draw(Graphics g){
         g.setColor(Color.blue);
         g.fillRoundRect(this.posX, this.posY, this.width, this.height, 30, 30);

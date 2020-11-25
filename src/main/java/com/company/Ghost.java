@@ -6,16 +6,55 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * The class Ghost, which creates 4 ghosts which are movable by the second player.
+ */
 public class Ghost {
-    int size = 50, vel = 5;
-    int startposx, startposy;
-    int posx = startposx, posy = startposy;
+    /**
+     * The size of the Ghosts.
+     */
+    int size = 50, /**
+     * The movement velocity of the ghosts.
+     */
+    vel = 5;
+    /**
+     * The starting x position of the ghosts.
+     */
+    int startPosX, /**
+     * The starting y position of the ghosts.
+     */
+    startPosY;
+    /**
+     * The x position.
+     */
+    int posx = startPosX, /**
+     * The y position of the ghosts.
+     */
+    posy = startPosY;
+    /**
+     * The movement direction of the gosts.
+     */
     String dir = "";
+    /**
+     * The next direction which is going to be set to the current direction as soon as the x or y pos % 50 is 0.
+     */
     String nextdir = "";
+    /**
+     * The color of the ghosts.
+     */
     String color;
+    /**
+     * The boolean which states if the ghosts are movable or not.
+     */
     boolean movable = true;
+    /**
+     * A counter variable to set random movement variables, because otherwise the random moves would be generated every frame.
+     */
     int counter = 0;
 
+    /**
+     * Loading the images.
+     */
     static HashMap<String, Image> images = new HashMap<>();
 
     static {
@@ -38,29 +77,39 @@ public class Ghost {
     }
 
 
+    /**
+     * Instantiates a new ghost and sets the starting position depending on the color.
+     *
+     * @param color the color of the ghost.
+     */
     public Ghost(String color) {
         this.color = color;
         switch (color) {
             case "blue" -> {
-                this.startposx = 550;
-                this.startposy = 450;
+                this.startPosX = 550;
+                this.startPosY = 450;
             }
             case "red" -> {
-                this.startposx = 550;
-                this.startposy = 500;
+                this.startPosX = 550;
+                this.startPosY = 500;
             }
             case "orange" -> {
-                this.startposx = 750;
-                this.startposy = 450;
+                this.startPosX = 750;
+                this.startPosY = 450;
             }
             case "green" -> {
-                this.startposx = 750;
-                this.startposy = 500;
+                this.startPosX = 750;
+                this.startPosY = 500;
             }
         }
     }
 
-
+    /**
+     * Movement method for the by the user selected ghost. The other ghosts are moved randomly.
+     * The method checks for borders and obstacles, ignoring the grey obstacle.
+     *
+     * @param c the counting variable of the for loop
+     */
     void movement(int c) {
         int randomGhost = 0;
         int randomInt = 0;
@@ -123,6 +172,12 @@ public class Ghost {
         }
     }
 
+    /**
+     * Drawing the ghost, selecting the color and the appropriate position.
+     *
+     * @param g     the Graphics object
+     * @param color the color
+     */
     void draw(Graphics g, String color) {
         Graphics2D g2d = (Graphics2D) g;
         String dir = this.dir;
@@ -131,5 +186,4 @@ public class Ghost {
         g.setColor(Color.black);
         g2d.drawString(Arrays.asList("blue", "red", "orange", "green").indexOf(color) + 1 + "", ((this.posx + this.size / 2) - 3), (this.posy + this.size / 2) + 14);
     }
-
 }
