@@ -8,7 +8,7 @@ import java.awt.event.KeyListener;
 import java.io.IOException;
 
 /**
- * The Window class which is drawing everything and listening for key inputs.
+ * The Window class which is drawing everything and listening for key inputs
  */
 public class Window extends JPanel implements KeyListener {
 
@@ -55,18 +55,14 @@ public class Window extends JPanel implements KeyListener {
      * Loading different images for the game over screen, startscreen with the space key sign and startscreen without the sign.
      */
     static Image gameOverImg;
-    /**
-     * The Startscreen.
-     */
+    static Image gameOverSpaceImg;
     static Image startscreen;
-    /**
-     * The Startscreen space.
-     */
     static Image startscreenSpace;
 
     static {
         try {
             gameOverImg = ImageIO.read(Ghost.class.getResource("/gameOver.png"));
+            gameOverSpaceImg = ImageIO.read(Ghost.class.getResource("/gameOver-Space.png"));
             startscreenSpace = ImageIO.read(Ghost.class.getResource("/PacMan-Start _Screen-Space.png"));
             startscreen = ImageIO.read(Ghost.class.getResource("/PacMan-Start _Screen.png"));
         } catch (IOException e) {
@@ -397,7 +393,10 @@ public class Window extends JPanel implements KeyListener {
             pacman.drawScore(g);
             if (frame % 5 == 0) pacman.score++;
 
-        } else if (Main.gamestatus == 0) g.drawImage(gameOverImg, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT, this);
+        } else if (Main.gamestatus == 0) {
+            if (frame <= 10) g.drawImage(gameOverImg, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT, this);
+            else g.drawImage(gameOverSpaceImg, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT, this);
+        }
         else if (Main.gamestatus == 2) {
             if (frame <= 10) g.drawImage(startscreen, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT, this);
             else g.drawImage(startscreenSpace, 0, 0, Main.GAME_WIDTH, Main.GAME_HEIGHT, this);
